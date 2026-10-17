@@ -1,0 +1,728 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>$BOWSKI · bino bowski</title>
+<meta name="description" content="$BOWSKI. the official coin of bino bowski, the pear with 5m+ views. live on solana. join the gang in the telegram 🌕">
+<meta property="og:title" content="$BOWSKI · bino bowski">
+<meta property="og:description" content="just hanin aroun. the official coin of @binobowski_ 🌕🚀">
+<meta property="og:image" content="https://bowski.vercel.app/coin.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@binobowski_">
+<meta name="twitter:title" content="$BOWSKI · bino bowski">
+<meta name="twitter:description" content="just hanin aroun. the official coin of @binobowski_ 🌕🚀">
+<meta name="twitter:image" content="https://bowski.vercel.app/coin.jpg">
+<meta name="theme-color" content="#14001f">
+<link rel="icon" href="favicon.png">
+<link rel="preload" as="font" type="font/woff2" href="fonts/bungee.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="fonts/space-grotesk.woff2" crossorigin>
+<link rel="preload" as="image" href="gen/wake.jpg">
+<script src="boot.js"></script>
+<style>
+@font-face{font-family:"Bungee";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/bungee.woff2) format("woff2")}
+@font-face{font-family:"Space Grotesk";font-style:normal;font-weight:300 700;font-display:swap;src:url(fonts/space-grotesk.woff2) format("woff2")}
+:root{
+  --bg:#14001f; --ink:#fff; --pink:#ff2bd6; --lime:#b6ff00; --gold:#ffc400; --cyan:#00e5ff; --purple:#7a00ff; --orange:#ff7a00;
+  --card:rgba(20,0,31,.78);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:hidden;overflow-x:clip;background:var(--bg)}
+body{background:var(--bg);color:var(--ink);font-family:"Space Grotesk",system-ui,sans-serif;overflow-x:hidden;overflow-x:clip;-webkit-tap-highlight-color:transparent}
+img,video{max-width:100%}
+#bg{position:fixed;inset:0;width:100vw;height:100vh;z-index:0;display:block}
+#heroVid{position:fixed;left:0;bottom:0;width:2px;height:2px;opacity:.01;pointer-events:none;z-index:-1}
+.flash{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(circle at 50% 40%,rgba(255,196,0,.55),rgba(255,43,214,.25) 40%,transparent 70%);opacity:0;transition:opacity .5s}
+.flash.on{opacity:1;transition:opacity .05s}
+main{position:relative;z-index:2}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.bungee{font-family:"Bungee",system-ui,sans-serif;font-weight:400}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:focus-visible{outline:3px solid var(--lime);outline-offset:3px}
+
+/* ===== intro: bowski asleep on the vault cam ===== */
+.intro{display:none}
+html.js .intro{display:flex}
+html.js.awake .intro{display:none}
+html.js:not(.awake) body{overflow:hidden}
+.intro{position:fixed;inset:0;z-index:100;background:#020005;align-items:center;justify-content:center;flex-direction:column;cursor:pointer;user-select:none;-webkit-user-select:none;padding:calc(64px + env(safe-area-inset-top)) 16px calc(24px + env(safe-area-inset-bottom));overflow:hidden;touch-action:manipulation}
+.intro::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 3px);pointer-events:none;z-index:3}
+.intro::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 45%,rgba(0,0,0,.85) 100%);pointer-events:none;z-index:2}
+.cam{position:relative;width:min(78vw,calc(52svh * .75),460px);aspect-ratio:3/4;border-radius:22px;overflow:hidden;border:2px solid rgba(182,255,0,.35);box-shadow:0 0 0 6px rgba(182,255,0,.06),0 0 80px rgba(182,255,0,.12);z-index:1}
+.cam img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(1) sepia(1) hue-rotate(40deg) saturate(2.6) brightness(.62) contrast(1.15);animation:breathe 3.2s ease-in-out infinite;transform-origin:50% 60%}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.025)}}
+.cam .hud{position:absolute;left:10px;right:10px;top:10px;display:flex;justify-content:space-between;font-family:ui-monospace,Menlo,monospace;font-size:12px;font-weight:700;color:var(--lime);text-shadow:0 0 6px rgba(182,255,0,.7);letter-spacing:.06em}
+.cam .rec{display:inline-flex;align-items:center;gap:6px}
+.cam .rec i{width:9px;height:9px;border-radius:50%;background:#ff2b2b;box-shadow:0 0 8px #ff2b2b;animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+.cam .hud-b{position:absolute;left:10px;right:10px;bottom:10px;font-family:ui-monospace,Menlo,monospace;font-size:11px;font-weight:700;color:var(--lime);opacity:.85;display:flex;justify-content:space-between}
+.zz{position:absolute;z-index:4;left:40%;top:44%;pointer-events:none}
+.zz span{position:absolute;font-family:"Bungee";color:#fff;opacity:0;text-shadow:3px 3px 0 var(--purple);animation:zz 3s ease-in infinite}
+.zz span:nth-child(1){font-size:26px;animation-delay:0s}
+.zz span:nth-child(2){font-size:40px;animation-delay:1s}
+.zz span:nth-child(3){font-size:58px;animation-delay:2s}
+@keyframes zz{0%{transform:translate(0,0) rotate(-10deg);opacity:0}15%{opacity:1}100%{transform:translate(90px,-170px) rotate(14deg);opacity:0}}
+.intro-shh{position:relative;z-index:4;margin-top:16px;font-weight:700;font-size:15px;color:rgba(255,255,255,.7);letter-spacing:.04em;text-align:center}
+.intro-btn:focus{outline:none}.intro-btn:focus-visible{outline:3px solid #fff;outline-offset:4px}
+.intro-btn{position:relative;z-index:4;margin-top:12px;min-height:60px;padding:0 26px;border-radius:16px;background:var(--lime);color:#14001f;font-family:"Bungee";font-size:clamp(18px,5.4vw,26px);border:3px solid #14001f;box-shadow:5px 5px 0 var(--pink);animation:nudge 1.6s ease-in-out infinite}
+@keyframes nudge{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.intro-skip{position:absolute;z-index:5;top:calc(10px + env(safe-area-inset-top));right:12px;min-height:44px;min-width:64px;padding:0 14px;border-radius:999px;border:2px solid rgba(255,255,255,.45);color:#fff;font-weight:700;font-size:14px;background:rgba(0,0,0,.4)}
+.intro-say{position:absolute;z-index:6;left:50%;top:50%;transform:translate(-50%,-50%) scale(.6);font-family:"Bungee";font-size:clamp(34px,11vw,96px);color:var(--gold);text-shadow:4px 4px 0 var(--pink),8px 8px 0 var(--purple);opacity:0;white-space:nowrap;pointer-events:none;text-align:center;line-height:1}
+.intro-say small{display:block;font-family:"Space Grotesk";font-size:clamp(16px,4.6vw,26px);font-weight:700;color:#fff;text-shadow:none;margin-top:10px}
+.cam video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;pointer-events:none}
+.intro.playing .cam video{opacity:1}
+.intro.playing .cam img{animation:none;filter:none}
+.intro.playing .zz,.intro.playing .intro-btn,.intro.playing .intro-shh{opacity:0;transition:opacity .2s}
+.intro.waking .cam img{animation:none;filter:none;transform:scale(1.08)}
+.intro.waking .cam{animation:shake .32s 3}
+.intro.waking .intro-say{animation:say .9s cubic-bezier(.2,1.6,.4,1) forwards}
+.intro.waking .zz,.intro.waking .intro-btn,.intro.waking .intro-shh{opacity:0;transition:opacity .2s}
+@keyframes say{0%{opacity:0;transform:translate(-50%,-50%) scale(.4) rotate(-8deg)}60%{opacity:1;transform:translate(-50%,-50%) scale(1.08) rotate(3deg)}100%{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(-2deg)}}
+.intro.gone{animation:gone .55s cubic-bezier(.6,0,.9,.4) forwards}
+@keyframes gone{to{opacity:0;transform:scale(1.6);filter:blur(8px)}}
+
+/* ===== top bar ===== */
+.top{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 12px;padding-top:max(6px,env(safe-area-inset-top));background:rgba(20,0,31,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:2px solid rgba(182,255,0,.18)}
+.tick{display:inline-flex;align-items:center;gap:6px;min-height:44px;font-family:"Bungee";font-size:18px;color:var(--gold);text-shadow:2px 2px 0 var(--pink);text-decoration:none;white-space:nowrap}
+.tick img{width:28px;height:28px;border-radius:50%;border:2px solid var(--gold)}
+.top-mc{display:none;align-items:center;gap:8px;font-weight:700;font-size:14px;padding:0 14px;min-height:40px;border-radius:999px;background:rgba(0,0,0,.45);border:2px solid var(--lime);color:var(--lime);font-variant-numeric:tabular-nums}
+.top nav{display:flex;gap:6px}
+.chip{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-width:44px;min-height:44px;padding:0 12px;border-radius:999px;border:2px solid #fff;font-weight:700;font-size:14px;text-decoration:none;background:rgba(0,0,0,.4);color:#fff}
+.chip:hover{background:#fff;color:var(--bg)}
+.chip.tg{background:var(--lime);color:#14001f;border-color:var(--lime)}
+.chip.snd{font-size:18px;padding:0}
+.chip.snd[aria-pressed="true"]{background:var(--gold);border-color:var(--gold)}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 0 rgba(182,255,0,.7);animation:ping 1.6s infinite;flex:none}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(182,255,0,.7)}80%,100%{box-shadow:0 0 0 10px rgba(182,255,0,0)}}
+@media (min-width:640px){.top-mc{display:inline-flex}}
+
+/* ===== marquee ===== */
+.marquee{position:relative;z-index:3;overflow:hidden;white-space:nowrap;background:var(--lime);color:#14001f;transform:rotate(-2.5deg);margin:0 -20px;border-top:3px solid #14001f;border-bottom:3px solid #14001f;box-shadow:0 6px 0 var(--pink)}
+.marquee.pink{background:var(--pink);color:#fff;transform:rotate(2deg);box-shadow:0 -6px 0 var(--gold)}
+.marquee .row{display:inline-block;padding:10px 0;font-family:"Bungee";font-size:20px;animation:mq 26s linear infinite}
+.marquee.pink .row{animation-direction:reverse;animation-duration:30s}
+.marquee .row span{margin:0 18px}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ===== hero ===== */
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:64px 16px 28px;max-width:1180px;margin:0 auto;position:relative}
+.hero .stage{flex:1;min-height:40svh;position:relative}
+.cam-tag{position:absolute;z-index:3;left:0;top:0;transform:translate(-50%,-50%);font-family:ui-monospace,Menlo,monospace;font-weight:700;font-size:12px;letter-spacing:.06em;color:#fff;background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.35);padding:5px 9px;border-radius:999px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .4s}
+.cam-tag.on{opacity:1}
+.cam-tag i{display:inline-block;width:8px;height:8px;border-radius:50%;background:#ff2b2b;margin-right:6px;vertical-align:0;animation:blink 1s steps(2) infinite}
+.kicker{display:inline-block;font-weight:700;font-size:13px;letter-spacing:.08em;color:#14001f;background:var(--gold);padding:5px 10px;border-radius:8px;transform:rotate(-2deg);margin-bottom:10px}
+.title{font-family:"Bungee";font-size:clamp(54px,15vw,180px);line-height:.86;color:var(--gold);text-shadow:4px 4px 0 var(--pink),8px 8px 0 var(--purple);position:relative;animation:wobble 2.4s ease-in-out infinite;max-width:100%}
+.title.glitch{animation:glitch .25s steps(2) 3}
+@keyframes wobble{0%,100%{transform:rotate(-1.5deg) scale(1)}50%{transform:rotate(1.5deg) scale(1.03)}}
+@keyframes glitch{0%{transform:translate(-6px,2px) skewX(8deg);text-shadow:-6px 0 var(--cyan),6px 0 var(--pink)}50%{transform:translate(6px,-2px) skewX(-8deg);text-shadow:6px 0 var(--lime),-6px 0 var(--pink)}100%{transform:none}}
+.lazy{font-size:clamp(18px,4.8vw,30px);font-weight:700;margin:12px 0 14px}
+.lazy em{font-style:normal;color:var(--lime);white-space:nowrap}
+.live{display:flex;flex-wrap:wrap;align-items:stretch;gap:10px;margin-bottom:14px}
+.mc-big{background:#05000a;border:3px solid var(--lime);border-radius:16px;padding:10px 14px 8px;box-shadow:5px 5px 0 var(--pink);min-width:0}
+.mc-big .lbl{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--lime)}
+.mc-big b{display:block;font-family:"Bungee";font-weight:400;font-size:clamp(34px,10vw,58px);line-height:1.05;color:#fff;font-variant-numeric:tabular-nums;transition:color .3s}
+.mc-big b.up{color:var(--lime)}
+.mc-big b.down{color:var(--pink)}
+.mini{display:flex;flex-direction:column;justify-content:center;gap:6px;font-weight:700;font-size:15px}
+.mini b{font-family:"Bungee";font-weight:400;color:var(--gold);font-size:20px;margin-right:4px;font-variant-numeric:tabular-nums}
+.ca-mini{display:flex;align-items:stretch;gap:8px;margin-bottom:12px;max-width:560px}
+.ca-mini code{flex:1;min-width:0;display:block;line-height:44px;font-family:ui-monospace,Menlo,monospace;font-weight:700;font-size:14px;color:var(--lime);background:#000;border:2px dashed var(--lime);border-radius:12px;padding:0 12px;min-height:48px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;cursor:pointer}
+.ca-mini .btn{min-height:48px;font-size:15px;padding:0 14px;box-shadow:4px 4px 0 #14001f}
+.btns{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:56px;padding:0 22px;border-radius:16px;font-family:"Bungee";font-size:18px;text-decoration:none;border:3px solid #14001f;box-shadow:5px 5px 0 #14001f;transition:transform .08s,box-shadow .08s;cursor:pointer;color:#14001f;text-align:center;line-height:1.1}
+.btn:active{transform:translate(4px,4px);box-shadow:1px 1px 0 #14001f}
+.btn.gold{background:var(--gold)}
+.btn.lime{background:var(--lime)}
+.btn.white{background:#fff}
+.btn.pink{background:var(--pink);color:#fff}
+.btn.cyan{background:var(--cyan)}
+.btn.dark{background:#14001f;color:#fff;border-color:#fff;box-shadow:5px 5px 0 var(--pink)}
+.btn.xl{min-height:68px;font-size:clamp(18px,5vw,26px)}
+.proof-strip{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.proof-strip span{font-family:"Bungee";font-size:13px;background:#14001f;color:var(--lime);border:2px solid var(--lime);border-radius:999px;padding:6px 12px;white-space:nowrap}
+@media (max-width:640px){
+  .hero{overflow:hidden}
+  .hero .title{font-size:min(17vw,96px)}
+  .hero .btns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .hero .btns .btn{min-width:0;font-size:15px;padding:0 10px;min-height:54px}
+  .hero .btns .btn.span2{grid-column:1/-1}
+  .proof-strip span{font-size:11px;padding:5px 9px}
+  .live{gap:8px}
+  .mc-big{flex:1 1 100%}
+  .mini{flex-direction:row;flex-wrap:wrap;gap:6px 16px;font-size:14px}
+}
+@media (min-width:900px){
+  .hero{justify-content:center;padding-top:96px}
+  .hero .stage{display:none}
+  .hero .copy{max-width:54%}
+  .hero .title{font-size:min(8.4vw,124px)}
+  .cam-tag{display:block}
+}
+
+/* ===== sections ===== */
+section.block{position:relative;max-width:1100px;margin:0 auto;padding:64px 16px}
+.h2{font-family:"Bungee";font-weight:400;font-size:clamp(34px,9vw,68px);line-height:.95;margin-bottom:18px;color:#fff;text-shadow:3px 3px 0 var(--pink)}
+.h2 small{display:block;font-family:"Space Grotesk";font-size:17px;font-weight:700;color:var(--lime);text-shadow:none;margin-top:10px;letter-spacing:.01em;line-height:1.3}
+.card{background:var(--card);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:3px solid #fff;border-radius:22px;padding:20px;box-shadow:8px 8px 0 var(--purple)}
+
+/* CA */
+.ca .card{border-color:var(--gold);box-shadow:8px 8px 0 var(--pink)}
+.ca-label{font-family:"Bungee";font-size:14px;color:var(--gold);margin-bottom:10px}
+.ca-addr{font-family:ui-monospace,Menlo,monospace;font-size:clamp(14px,3.9vw,22px);font-weight:700;word-break:break-all;background:#000;border:2px dashed var(--lime);border-radius:12px;padding:16px;margin-bottom:14px;color:var(--lime);min-height:60px;display:flex;align-items:center;cursor:pointer}
+.ca .btns .btn{flex:1 1 200px}
+.warn{margin-top:14px;font-weight:700;font-size:14px;opacity:.9}
+
+/* ===== the gang: live counters ===== */
+.counters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.ctr{position:relative;background:#05000a;border:3px solid #fff;border-radius:20px;padding:16px 14px 14px;box-shadow:6px 6px 0 var(--purple);text-decoration:none;color:#fff;display:flex;flex-direction:column;gap:4px;min-width:0;overflow:hidden}
+.ctr b{font-family:"Bungee";font-weight:400;font-size:clamp(34px,10vw,64px);line-height:1;color:var(--gold);font-variant-numeric:tabular-nums;white-space:nowrap}
+.ctr span{font-weight:700;font-size:15px;line-height:1.25}
+.ctr small{font-size:13px;opacity:.75;font-weight:700}
+.ctr .live-tag{position:absolute;top:12px;right:12px;display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--lime)}
+.ctr.tg{grid-column:1/-1;background:var(--lime);color:#14001f;border-color:#14001f;box-shadow:6px 6px 0 var(--pink)}
+.ctr.tg b{color:#14001f;font-size:clamp(56px,18vw,120px)}
+.ctr.tg span{font-family:"Bungee";font-weight:400;font-size:clamp(18px,5vw,28px)}
+.ctr.tg i{font-style:normal;font-weight:700;font-size:15px}
+.ctr.tg .live-tag{color:#14001f}
+.ctr.tg .dot{background:#14001f;animation:none}
+.ctr:nth-child(3){box-shadow:6px 6px 0 var(--lime)}
+.ctr:nth-child(4){box-shadow:6px 6px 0 var(--gold)}
+.ctr:nth-child(5){box-shadow:6px 6px 0 var(--cyan)}
+.src{margin-top:14px;font-size:13px;font-weight:700;opacity:.7}
+@media (min-width:860px){
+  .counters{grid-template-columns:2fr 1fr 1fr;grid-template-rows:auto auto}
+  .ctr.tg{grid-column:1;grid-row:1/3;justify-content:flex-end}
+}
+.tg-mega{display:flex;align-items:center;gap:16px;margin-top:22px;padding:18px 20px;border-radius:22px;background:linear-gradient(110deg,#2aabee,#7a00ff 60%,#ff2bd6);border:3px solid #fff;box-shadow:8px 8px 0 #14001f,8px 8px 0 3px var(--lime);text-decoration:none;color:#fff;transition:transform .1s}
+.tg-mega:active{transform:translate(4px,4px)}
+.tg-mega .ico{flex:none;width:64px;height:64px;border-radius:50%;background:#fff;display:grid;place-items:center}
+.tg-mega .ico svg{width:36px;height:36px}
+.tg-mega .t{display:block;font-family:"Bungee";font-size:clamp(20px,5.6vw,34px);line-height:1}
+.tg-mega .s{display:block;font-weight:700;font-size:15px;margin-top:6px;opacity:.95}
+
+/* ===== the wall ===== */
+.wall-sec{position:relative;padding:36px 0 20px}
+.wall-sec .h2{max-width:1100px;margin:0 auto 22px;padding:0 16px}
+.wall{display:flex;flex-direction:column;gap:14px;transform:rotate(-2deg);margin:0 -40px}
+.wall-row{overflow:hidden}
+.track{display:flex;gap:14px;width:max-content;animation:slide 90s linear infinite}
+.wall-row.r2 .track{animation-direction:reverse;animation-duration:110s}
+.wall-row.r3 .track{animation-duration:80s}
+.wall:hover .track{animation-play-state:paused}
+@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.meme{position:relative;flex:none;width:150px;aspect-ratio:3/4;border-radius:14px;overflow:hidden;border:3px solid #fff;background:#2a0a3a;box-shadow:4px 4px 0 var(--pink)}
+.meme:nth-child(3n){box-shadow:4px 4px 0 var(--lime)}
+.meme:nth-child(3n+1){box-shadow:4px 4px 0 var(--gold)}
+.meme img{width:100%;height:100%;object-fit:cover;display:block}
+.meme figcaption{position:absolute;left:0;right:0;bottom:0;padding:16px 8px 7px;font-size:12px;font-weight:700;line-height:1.2;background:linear-gradient(transparent,rgba(0,0,0,.85))}
+@media (min-width:760px){.meme{width:210px}.meme figcaption{font-size:13px}}
+
+/* raid */
+.raid-grid{display:grid;gap:22px;align-items:center}
+.phone{position:relative;width:min(260px,70vw);margin:0 auto;aspect-ratio:9/16;border-radius:28px;border:4px solid #fff;overflow:hidden;background:#000;box-shadow:10px 10px 0 var(--pink);transform:rotate(-3deg)}
+.phone video,.phone img{width:100%;height:100%;object-fit:cover;display:block}
+.phone .badge{position:absolute;top:10px;left:10px;font-family:"Bungee";font-size:13px;background:var(--pink);color:#fff;padding:5px 9px;border-radius:8px}
+.raid-steps{list-style:none;display:grid;gap:10px;margin:6px 0 20px}
+.raid-steps li{display:flex;align-items:center;gap:12px;font-weight:700;font-size:17px}
+.raid-steps b{flex:none;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-family:"Bungee";font-weight:400;background:var(--gold);color:#14001f;border:2px solid #14001f}
+.raid-note{margin-top:14px;font-size:14px;font-weight:700;opacity:.8}
+.raid .btn.xl{width:100%}
+@media (min-width:860px){.raid-grid{grid-template-columns:320px 1fr;gap:48px}}
+.contest{margin-top:34px;display:grid;gap:14px;border-color:var(--gold);box-shadow:8px 8px 0 var(--lime);background:linear-gradient(135deg,rgba(255,196,0,.18),rgba(20,0,31,.85) 55%)}
+.contest .trophy{font-size:56px;line-height:1}
+.contest h3{font-family:"Bungee";font-weight:400;font-size:clamp(26px,7vw,40px);color:var(--gold);text-shadow:3px 3px 0 var(--pink)}
+.contest p{font-weight:700;font-size:17px;line-height:1.4}
+@media (min-width:760px){.contest{grid-template-columns:auto 1fr auto;align-items:center}}
+
+/* play card */
+.play{padding-top:24px}
+.play-card{display:grid;grid-template-columns:110px 1fr;gap:16px;align-items:center;padding:16px;border-radius:24px;text-decoration:none;color:#fff;background:linear-gradient(120deg,#00323a,#14001f 55%,#3a0030);border:3px solid var(--cyan);box-shadow:8px 8px 0 var(--pink);transition:transform .1s}
+.play-card:active{transform:translate(4px,4px);box-shadow:4px 4px 0 var(--pink)}
+.play-pic{position:relative;display:block;aspect-ratio:3/4;border-radius:16px;overflow:hidden;border:3px solid #fff;transform:rotate(-4deg)}
+.play-pic img{width:100%;height:100%;object-fit:cover;display:block}
+.play-pic .zzz{position:absolute;right:6px;top:4px;font-family:"Bungee";color:#fff;text-shadow:2px 2px 0 var(--purple);font-size:16px}
+.play-pic .zzz b{font-weight:400;font-size:22px}.play-pic .zzz i{font-style:normal;font-size:28px}
+.play-txt{display:flex;flex-direction:column;gap:6px;min-width:0}
+.play-k{font-family:"Bungee";font-size:12px;color:var(--cyan)}
+.play-h{font-family:"Bungee";font-size:clamp(22px,6vw,40px);line-height:1.05;color:#fff;text-shadow:3px 3px 0 var(--pink)}
+.play-s{font-weight:700;font-size:15px;opacity:.9}
+.play-btn{margin-top:8px;width:100%}
+@media (max-width:480px){.play-card{grid-template-columns:1fr}.play-pic{width:130px;justify-self:center}.play-txt{text-align:center}}
+@media (min-width:760px){.play-card{grid-template-columns:200px 1fr;gap:28px;padding:22px}.play-btn{width:auto;align-self:flex-start}}
+
+/* ===== story, pinned ===== */
+.story{position:relative;height:calc(100svh + 3 * 85svh)}
+.story-stage{position:sticky;top:0;height:100svh;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:96px 16px 16px}
+.story-bg{position:absolute;inset:-40px;background:radial-gradient(circle at 50% 40%,rgba(122,0,255,.45),rgba(20,0,31,.2) 60%,transparent 80%)}
+.story-head{position:absolute;top:calc(62px + env(safe-area-inset-top));left:16px;right:16px;z-index:5;display:flex;justify-content:space-between;align-items:center;font-family:"Bungee";font-size:15px;color:var(--gold);text-shadow:2px 2px 0 var(--pink)}
+.story-dots{display:flex;gap:6px}
+.story-dots i{width:26px;height:6px;border-radius:3px;background:rgba(255,255,255,.25);transition:background .3s}
+.story-dots i.on{background:var(--lime)}
+.deck{position:relative;flex:none;width:min(calc(100vw - 32px),calc((100svh - 340px) * .75),520px);aspect-ratio:3/4}
+.scene{position:absolute;inset:0;will-change:transform}
+.scene .pic{position:absolute;inset:0;border-radius:22px;overflow:hidden;border:4px solid #fff;background:#2a0a3a;box-shadow:10px 10px 0 var(--c,var(--pink))}
+.scene img,.scene video{width:100%;height:100%;object-fit:cover;display:block;transform:scale(var(--z,1.08));will-change:transform}
+.scene .ep{position:absolute;top:12px;left:12px;font-family:"Bungee";font-size:13px;background:#14001f;color:var(--gold);border:2px solid var(--gold);border-radius:8px;padding:4px 8px}
+.caps{position:relative;z-index:5;flex:none;width:100%;max-width:560px;height:132px;margin-top:22px}
+.cap{position:absolute;left:0;right:0;top:0;text-align:center;opacity:0}
+.cap p{display:inline;font-weight:700;font-size:clamp(20px,5.6vw,38px);line-height:1.3;background:#14001f;box-decoration-break:clone;-webkit-box-decoration-break:clone;padding:2px 10px;border-radius:8px;box-shadow:0 0 0 2px var(--lime)}
+.cap .tag{display:block;font-family:"Bungee";font-size:clamp(28px,8.4vw,60px);color:var(--gold);text-shadow:3px 3px 0 var(--pink);margin-top:10px}
+@media (min-width:900px){
+  .story-stage{flex-direction:row;gap:6vw;padding:96px 6vw 24px}
+  .deck{width:min(calc((100svh - 190px) * .75),520px)}
+  .caps{width:min(40vw,520px);height:280px;margin:0}
+  .cap{top:70px;text-align:left}
+  .story-head{left:max(6vw,calc((100vw - 1100px) / 2));right:max(6vw,calc((100vw - 1100px) / 2));top:88px}
+}
+
+/* reels */
+.reel-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.reel{position:relative;display:block;border-radius:22px;overflow:hidden;border:3px solid #fff;background:#000;text-decoration:none;color:#fff;box-shadow:8px 8px 0 var(--pink);aspect-ratio:9/16}
+.reel:nth-child(2){box-shadow:8px 8px 0 var(--lime)}
+.reel video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.reel .meta{position:absolute;left:0;right:0;bottom:0;padding:40px 12px 12px;background:linear-gradient(transparent,rgba(0,0,0,.88))}
+.reel .views{display:block;font-family:"Bungee";font-size:clamp(30px,9vw,64px);line-height:1;color:var(--gold);text-shadow:3px 3px 0 var(--pink)}
+.reel .views small{font-size:.42em;color:#fff;text-shadow:none;margin-left:4px}
+.reel .likes{display:block;font-weight:700;font-size:14px;margin-top:6px}
+.reel .cap2{display:block;font-weight:700;font-size:14px;opacity:.85;margin-top:2px}
+.reel .ig{position:absolute;top:10px;right:10px;font-family:"Bungee";font-size:12px;background:linear-gradient(45deg,#f9ce34,#ee2a7b,#6228d7);padding:5px 9px;border-radius:8px}
+@media (min-width:860px){.reel-row{grid-template-columns:repeat(2,minmax(0,340px));justify-content:center;gap:28px}}
+.sub-h{font-family:"Bungee";font-weight:400;font-size:clamp(24px,6vw,36px);margin:44px 0 6px;text-shadow:2px 2px 0 var(--purple)}
+.sub-p{font-weight:700;opacity:.8;margin-bottom:14px}
+.xrow{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:16px;padding:4px 16px 18px;margin:0 -16px;scrollbar-width:none;overscroll-behavior-x:contain}
+.xrow::-webkit-scrollbar{display:none}
+.xclip{flex:none;width:200px;scroll-snap-align:start;text-decoration:none;color:#fff}
+.xclip .v{position:relative;aspect-ratio:9/16;border-radius:18px;overflow:hidden;border:3px solid #fff;background:#000;box-shadow:5px 5px 0 var(--gold)}
+.xclip:nth-child(2n) .v{box-shadow:5px 5px 0 var(--cyan)}
+.xclip.wide{width:300px}
+.xclip.wide .v{aspect-ratio:auto;height:356px}
+.xclip video{width:100%;height:100%;object-fit:cover;display:block}
+.xclip p{font-weight:700;font-size:14px;line-height:1.3;margin-top:10px}
+.xclip p b{display:block;font-family:"Bungee";font-weight:400;font-size:14px;color:var(--lime)}
+
+/* receipts */
+.receipts{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.receipt{display:block;text-decoration:none;color:inherit}
+.receipt img{width:100%;height:160px;object-fit:cover;object-position:left top;border-radius:12px;border:2px solid #14001f;display:block}
+.receipt h3{margin:12px 0 4px;font-family:"Bungee";font-weight:400;font-size:20px}
+.receipt p{margin:0;opacity:.85}
+
+/* lore id */
+.idcard{position:relative;max-width:760px;margin:0 auto;border-radius:24px;padding:18px;color:#14001f;background:linear-gradient(135deg,#f6ffd9 0%,#e3ffa0 40%,#ffd6f6 100%);border:4px solid #14001f;box-shadow:10px 10px 0 var(--pink),10px 10px 0 4px #14001f;transform:rotate(-1.2deg);overflow:hidden}
+.idcard::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,rgba(255,255,255,0) 0 18px,rgba(255,255,255,.35) 18px 22px);pointer-events:none;mix-blend-mode:overlay}
+.idcard .holo{position:absolute;right:-30px;top:-30px;width:140px;height:140px;border-radius:50%;background:conic-gradient(from 0deg,#ff2bd6,#00e5ff,#b6ff00,#ffc400,#ff2bd6);opacity:.55;filter:blur(2px);animation:spin 8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.id-top{position:relative;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-family:"Bungee";font-size:13px;border-bottom:3px dashed #14001f;padding-bottom:10px;margin-bottom:14px}
+.id-body{position:relative;display:grid;grid-template-columns:1fr;gap:16px;align-items:start}
+.id-body .id-pic{width:150px;justify-self:center;transform:rotate(-3deg)}
+.id-pic{border-radius:14px;overflow:hidden;border:3px solid #14001f;aspect-ratio:3/4;background:#9bb;cursor:pointer;transition:transform .1s;touch-action:manipulation}
+.id-pic:active{transform:scale(.96) rotate(-3deg)}
+.id-pic img{width:100%;height:100%;object-fit:cover;display:block}
+.idcard dl{display:grid;grid-template-columns:96px 1fr;gap:8px 12px;font-size:16px}
+.idcard dt{font-family:"Bungee";font-size:12px;padding-top:2px;opacity:.75}
+.idcard dd{font-weight:700;line-height:1.3}
+.nap{position:relative;margin-top:18px;background:#14001f;color:#fff;border-radius:18px;padding:16px;text-align:center}
+.nap-h{display:flex;justify-content:space-between;align-items:baseline;font-family:"Bungee";font-size:16px;color:var(--lime)}
+.nap-h b{font-weight:400;font-size:28px;color:var(--gold);font-variant-numeric:tabular-nums}
+.meter{height:30px;border:3px solid #fff;border-radius:999px;overflow:hidden;background:#000;margin:10px 0 8px}
+.meter i{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--lime),var(--gold),var(--pink));transition:width .1s}
+.mood{font-family:"Bungee";font-size:clamp(18px,5.4vw,28px);min-height:1.3em}
+.wake{margin:14px auto 0;width:min(320px,100%);font-size:22px;min-height:64px;user-select:none;-webkit-user-select:none;touch-action:manipulation}
+.stats{display:flex;justify-content:center;gap:22px;margin-top:10px;font-weight:700;opacity:.9;flex-wrap:wrap;font-size:14px}
+.id-sig{position:relative;display:flex;justify-content:space-between;align-items:baseline;margin-top:14px;font-family:"Bungee";font-size:12px;opacity:.85;gap:10px;flex-wrap:wrap}
+.id-sig span:last-child{font-family:"Space Grotesk";font-style:italic;font-weight:700;font-size:26px;opacity:1;transform:rotate(-6deg);display:inline-block}
+@media (min-width:640px){.id-body{grid-template-columns:200px 1fr;gap:24px}.id-body .id-pic{width:auto;transform:none}.idcard{padding:24px}.idcard dl{font-size:17px;grid-template-columns:110px 1fr}}
+
+/* bee tease */
+.bee{position:relative;z-index:2;background:radial-gradient(ellipse at 70% 30%,rgba(255,122,0,.25),transparent 60%),linear-gradient(180deg,#0b0014,#020008);border-top:3px solid var(--orange);border-bottom:3px solid var(--orange);overflow:hidden}
+.bee-in{max-width:1100px;margin:0 auto;padding:64px 16px;display:grid;gap:26px;align-items:center}
+.bee-pic{position:relative;width:min(300px,72vw);margin:0 auto;aspect-ratio:3/4;border-radius:22px;overflow:hidden;border:3px solid var(--orange);box-shadow:8px 8px 0 var(--purple)}
+.bee-pic img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.55) contrast(1.2) saturate(.8);transition:filter .6s}
+.bee-pic:hover img{filter:brightness(.8) contrast(1.1)}
+.bee-pic .q{position:absolute;inset:0;display:grid;place-items:center;font-family:"Bungee";font-size:120px;color:rgba(255,196,0,.85);text-shadow:4px 4px 0 var(--purple);pointer-events:none;animation:flick 3s infinite}
+@keyframes flick{0%,100%{opacity:.9}45%{opacity:.9}50%{opacity:.2}55%{opacity:.9}}
+.bee .h2{text-shadow:3px 3px 0 var(--orange)}
+.bee .h2 small{color:var(--orange)}
+.bee-k{font-family:"Bungee";font-size:14px;color:var(--gold);margin-bottom:8px}
+.count{display:flex;gap:8px;flex-wrap:wrap}
+.count .u{background:#000;border:3px solid var(--orange);border-radius:14px;padding:8px 8px 6px;min-width:72px;text-align:center;box-shadow:4px 4px 0 var(--purple);flex:1 1 0}
+.count .n{font-family:"Bungee";font-size:clamp(30px,9vw,52px);line-height:1;color:var(--orange);font-variant-numeric:tabular-nums}
+.count .l{font-size:11px;font-weight:700;letter-spacing:.12em;opacity:.8;margin-top:2px}
+.bee-date{margin-top:12px;font-weight:700;opacity:.85}
+@media (min-width:860px){.bee-in{grid-template-columns:320px 1fr;gap:56px}.count{max-width:520px}}
+
+/* how to buy, links, footer */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.step .num{font-family:"Bungee";font-size:54px;line-height:1;color:var(--gold);text-shadow:3px 3px 0 var(--pink)}
+.step h3{font-family:"Bungee";font-weight:400;font-size:22px;margin:6px 0}
+.step p{font-weight:500;opacity:.92;line-height:1.4}
+.step:nth-child(2){box-shadow:8px 8px 0 var(--pink)}
+.step:nth-child(3){box-shadow:8px 8px 0 var(--lime)}
+.links{display:flex;flex-wrap:wrap;gap:12px}
+.links .btn{flex:1 1 300px}
+footer{position:relative;z-index:2;text-align:center;padding:40px 16px calc(110px + env(safe-area-inset-bottom));font-weight:700}
+footer .big{font-family:"Bungee";font-size:clamp(40px,12vw,120px);color:var(--gold);text-shadow:4px 4px 0 var(--pink);line-height:1;margin-bottom:12px}
+footer p{opacity:.85;max-width:620px;margin:0 auto 6px;line-height:1.4}
+
+/* mobile dock */
+.dock{position:fixed;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:30;display:grid;grid-template-columns:1fr 1.25fr;gap:8px;transform:translateY(140%);transition:transform .3s cubic-bezier(.2,1.2,.4,1)}
+.dock.on{transform:none}
+body.in-story .dock{transform:translateY(140%)}
+.dock .btn{min-height:52px;font-size:15px;padding:0 8px;box-shadow:4px 4px 0 #14001f}
+@media (min-width:900px){.dock{left:auto;right:20px;width:420px}}
+
+/* bits */
+.pop{position:fixed;z-index:120;pointer-events:none;font-size:28px;will-change:transform,opacity;animation:pop 1s ease-out forwards}
+@keyframes pop{0%{transform:translate(-50%,-50%) scale(.4) rotate(0);opacity:1}100%{transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(1.3) rotate(var(--rot));opacity:0}}
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom));transform:translate(-50%,200px);z-index:110;background:var(--lime);color:#14001f;font-family:"Bungee";padding:14px 22px;border-radius:14px;border:3px solid #14001f;box-shadow:5px 5px 0 #14001f;transition:transform .25s;white-space:nowrap;max-width:calc(100vw - 32px)}
+.toast.on{transform:translate(-50%,0)}
+.shake{animation:shake .3s}
+@keyframes shake{25%{transform:translate(4px,-3px)}50%{transform:translate(-4px,3px)}75%{transform:translate(3px,2px)}}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .6s,transform .6s cubic-bezier(.2,1,.3,1)}
+.reveal.in{opacity:1;transform:none}
+html:not(.js) .reveal{opacity:1;transform:none}
+
+@media (prefers-reduced-motion:reduce){
+  .title,.marquee .row,.track,.dot,.cam img,.zz span,.intro-btn,.holo,.bee-pic .q,.cam-tag i,.cam .rec i{animation:none!important}
+  .zz span{opacity:.8}.zz span:nth-child(2){transform:translate(26px,-50px)}.zz span:nth-child(3){transform:translate(56px,-110px)}
+  .wall{transform:none;margin:0}
+  .wall-row{overflow-x:auto}
+  .story{height:auto}
+  .story-stage{position:relative;height:auto;display:block;padding:110px 16px 40px}
+  .deck{position:static;width:100%;max-width:560px;margin:0 auto;aspect-ratio:auto}
+  .scene{position:relative;margin-bottom:96px;aspect-ratio:3/4}.scene .cap{position:absolute;top:auto;bottom:-84px}
+  .caps{position:static;height:auto;margin:0}
+  .cap{position:static;opacity:1;transform:none;margin:0 0 30px;text-align:center}
+  .reveal{opacity:1;transform:none;transition:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body data-have="wake.mp4 wake.jpg hero.mp4 hero.jpg scene1-shoes.webp scene2-roadster.webp scene3-rocket.webp scene4-moon-throne.webp scene2-roadster.mp4 scene3-rocket.mp4 lore.webp bee-tease.webp">
+<canvas id="bg" aria-hidden="true"></canvas>
+<video id="heroVid" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+<div class="flash" id="flash"></div>
+
+<div class="intro" id="intro" aria-label="bowski is asleep. tap to wake him">
+  <button class="intro-skip" id="introSkip" type="button">skip ›</button>
+  <div class="cam">
+    <img src="gen/wake.jpg" data-gen="gen/wake.jpg" data-fb="img/intro-cctv.webp" alt="bino bowski asleep" width="540" height="968">
+    <video id="wakeVid" muted playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+    <div class="hud"><span class="rec"><i></i>REC</span></div>
+    <div class="hud-b"><span>CAM 01 · <span id="camClock">03:12:07</span></span><span id="camSubj">subject: asleep</span></div>
+    <div class="zz" aria-hidden="true"><span>z</span><span>z</span><span>Z</span></div>
+  </div>
+  <p class="intro-shh">shhh. he's sleeping</p>
+  <button class="intro-btn" id="introBtn" type="button">TAP TO WAKE BOWSKI 👆</button>
+  <div class="intro-say" aria-hidden="true">HE'S UP<small>barely 😐</small></div>
+</div>
+
+<header class="top">
+  <a class="tick" href="#top"><img src="favicon.png" alt="" width="28" height="28">$BOWSKI</a>
+  <span class="top-mc" title="market cap, live from dexscreener"><i class="dot"></i><span>MC</span><span data-k="marketCap" data-fmt="usd">live</span></span>
+  <nav aria-label="socials">
+    <a class="chip" href="https://x.com/binobowski_" target="_blank" rel="noopener noreferrer" aria-label="bowski on X">X</a>
+    <a class="chip" href="https://www.instagram.com/binobowski_/" target="_blank" rel="noopener noreferrer" aria-label="bowski on instagram">IG</a>
+    <a class="chip tg" href="https://t.me/binobowski" target="_blank" rel="noopener noreferrer" aria-label="the bowski telegram">TG</a>
+    <button class="chip snd" id="sndBtn" type="button" aria-pressed="false" aria-label="sound off. tap for sound">🔇</button>
+  </nav>
+</header>
+
+<main>
+  <section class="hero" id="top">
+    <div class="stage" aria-hidden="true"></div>
+    <span class="cam-tag" id="camTag" aria-hidden="true"><i></i>LIVE · BOWSKI CAM · ORBIT</span>
+    <div class="copy">
+      <span class="kicker">bino bowski's official coin · solana</span>
+      <h1 class="title" id="title">$BOWSKI</h1>
+      <p class="lazy">just hanin aroun. <em>bowski on the moon 🌕</em></p>
+      <div class="live">
+        <div class="mc-big"><span class="lbl"><i class="dot"></i>MARKET CAP · LIVE</span><b id="mcHero" data-k="marketCap" data-fmt="usd">$...</b></div>
+        <div class="mini">
+          <span><b data-k="tgMembers">...</b> gang in the telegram</span>
+          <span><b data-k="buys1h">...</b> buys in the last hour</span>
+        </div>
+      </div>
+      <div class="ca-mini">
+        <code class="js-copy" title="tap to copy">84Ciai5YhpxxYiLE55SJqGHY3jftEtVxvcBXMwyapump</code>
+        <button class="btn lime js-copy" type="button">COPY CA</button>
+      </div>
+      <div class="btns">
+        <a class="btn gold span2" id="buyTop" href="https://pump.fun/coin/84Ciai5YhpxxYiLE55SJqGHY3jftEtVxvcBXMwyapump" target="_blank" rel="noopener noreferrer">BUY ON PUMP.FUN</a>
+        <a class="btn lime span2" href="https://t.me/binobowski" target="_blank" rel="noopener noreferrer">JOIN THE TELEGRAM 💬</a>
+        <a class="btn cyan span2" href="/play/">PLAY BOWSKI FLAP 🎮</a>
+        <a class="btn pink" href="https://dexscreener.com/solana/84Ciai5YhpxxYiLE55SJqGHY3jftEtVxvcBXMwyapump" target="_blank" rel="noopener noreferrer">CHART 📈</a>
+        <a class="btn white" href="https://x.com/binobowski_" target="_blank" rel="noopener noreferrer">FOLLOW X</a>
+      </div>
+      <div class="proof-strip">
+        <span>✅ DEX PAID</span><span>🔥 2% BURNED</span><span>🔒 1% LOCKED</span><span>🫧 TOP WALLETS NOT OURS</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true"><div class="row" id="mq1"></div></div>
+
+  <section class="block ca" id="ca">
+    <h2 class="h2 reveal">THE CA<small>only from @binobowski_. anything else is fake 🤫</small></h2>
+    <div class="card reveal">
+      <div class="ca-label">CONTRACT ADDRESS · SOLANA</div>
+      <div class="ca-addr js-copy" id="caAddr" title="tap to copy">84Ciai5YhpxxYiLE55SJqGHY3jftEtVxvcBXMwyapump</div>
+      <div class="btns">
+        <button class="btn lime js-copy" type="button">COPY CA</button>
+        <a class="btn gold" href="https://pump.fun/coin/84Ciai5YhpxxYiLE55SJqGHY3jftEtVxvcBXMwyapump" target="_blank" rel="noopener noreferrer">BUY ON PUMP.FUN</a>
+        <a class="btn white" href="https://dexscreener.com/solana/84Ciai5YhpxxYiLE55SJqGHY3jftEtVxvcBXMwyapump" target="_blank" rel="noopener noreferrer">CHART</a>
+      </div>
+      <p class="warn">bowski only posts the CA from his own X and instagram. a different address is not him.</p>
+    </div>
+  </section>
+
+  <section class="block gang" id="gang">
+    <h2 class="h2 reveal">THE PEAR GANG<small>real numbers, pulled live every minute. no bots. bowski is too tired to make bots.</small></h2>
+    <div class="counters reveal">
+      <a class="ctr tg" href="https://t.me/binobowski" target="_blank" rel="noopener noreferrer">
+        <span class="live-tag"><i class="dot"></i>LIVE</span>
+        <b data-k="tgMembers">...</b>
+        <span>gang in the telegram</span>
+        <i>get in there →</i>
+      </a>
+      <div class="ctr"><span class="live-tag"><i class="dot"></i>LIVE</span><b data-k="tgOnline">...</b><span>awake in the tg rn</span><small>bowski is not one of them</small></div>
+      <div class="ctr"><span class="live-tag"><i class="dot"></i>LIVE</span><b data-k="buys1h">...</b><span>buys in the last hour</span><small><i data-k="sells1h">...</i> sells</small></div>
+      <div class="ctr"><span class="live-tag"><i class="dot"></i>24H</span><b data-k="volume24h" data-fmt="usd">...</b><span>traded in 24h</span></div>
+      <div class="ctr"><span class="live-tag"><i class="dot"></i>LIVE</span><b data-k="marketCap" data-fmt="usd">...</b><span>market cap</span></div>
+    </div>
+    <p class="src" id="src">from dexscreener and t.me/binobowski · <span id="ago">loading</span></p>
+    <a class="tg-mega reveal" href="https://t.me/binobowski" target="_blank" rel="noopener noreferrer">
+      <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="#2aabee" d="M21.9 4.3 18.8 19c-.2 1-.8 1.3-1.7.8l-4.6-3.4-2.2 2.1c-.3.3-.5.5-1 .5l.3-4.7 8.6-7.8c.4-.3-.1-.5-.6-.2L6.9 13 2.3 11.6c-1-.3-1-1 .2-1.5L20.5 3c.8-.3 1.6.2 1.4 1.3z"/></svg></span>
+      <span><span class="t">GET IN THE TELEGRAM</span><span class="s">memes, raids, every bowski drop first. he's asleep in there too 😴</span></span>
+    </a>
+  </section>
+
+  <section class="wall-sec" id="wall">
+    <h2 class="h2 reveal">THE WALL<small>every bowski posted so far. the gang posts. he naps.</small></h2>
+    <div class="wall" id="wallRows">
+      <div class="wall-row r1"><div class="track">
+        <figure class="meme"><img src="img/wall/01-king.webp" alt="bowski crowned king" loading="lazy" decoding="async" width="480" height="640"><figcaption>the king has awoken. already tired 😴</figcaption></figure>
+        <figure class="meme"><img src="img/wall/13-rocket-rodeo.webp" alt="bowski riding a rocket like a rodeo bull" loading="lazy" decoding="async" width="480" height="640"><figcaption>yeeehaw. hold on to something 🤠</figcaption></figure>
+        <figure class="meme"><img src="img/wall/30-security-camera.webp" alt="bowski asleep in a vault on security camera" loading="lazy" decoding="async" width="480" height="640"><figcaption>slept in the vault. no regrets</figcaption></figure>
+        <figure class="meme"><img src="img/wall/09-gang-bull.webp" alt="the pear gang around a gold bull" loading="lazy" decoding="async" width="480" height="640"><figcaption>the gang is here 🍐🍐🍐</figcaption></figure>
+        <figure class="meme"><img src="img/wall/04-tarot.webp" alt="bowski as a tarot card" loading="lazy" decoding="async" width="480" height="640"><figcaption>its always the moon card 🔮</figcaption></figure>
+        <figure class="meme"><img src="img/wall/31-pool-float.webp" alt="bowski on a pool float in space" loading="lazy" decoding="async" width="480" height="640"><figcaption>gm from space 🛟</figcaption></figure>
+        <figure class="meme"><img src="img/wall/08-graffiti.webp" alt="bowski painted on a street wall" loading="lazy" decoding="async" width="480" height="640"><figcaption>someone painted him on a wall 🎨</figcaption></figure>
+        <figure class="meme"><img src="img/wall/28-gold-statue.webp" alt="a gold statue of bowski" loading="lazy" decoding="async" width="480" height="640"><figcaption>they built him a statue. he doesnt know why</figcaption></figure>
+        <figure class="meme"><img src="img/wall/02-pixel-game.webp" alt="bowski in a pixel platform game" loading="lazy" decoding="async" width="480" height="640"><figcaption>level 1 🎮</figcaption></figure>
+        <figure class="meme"><img src="img/wall/25-concert.webp" alt="the gang at a bowski concert" loading="lazy" decoding="async" width="480" height="640"><figcaption>the gang showed up 🎤</figcaption></figure>
+        <figure class="meme"><img src="img/wall/35-museum.webp" alt="bowski in a museum next to the mona lisa" loading="lazy" decoding="async" width="480" height="640"><figcaption>in a museum now. just hanin aroun</figcaption></figure>
+        <figure class="meme"><img src="img/wall/22-wall-smash.webp" alt="bowski smashing through a wall of coins" loading="lazy" decoding="async" width="480" height="640"><figcaption>coming through 💥</figcaption></figure>
+        <figure class="meme"><img src="img/wall/36-balloon.webp" alt="a giant bowski parade balloon" loading="lazy" decoding="async" width="480" height="640"><figcaption>bigger every day. the gang keeps him up 🎈</figcaption></figure>
+      </div></div>
+      <div class="wall-row r2"><div class="track">
+        <figure class="meme"><img src="img/wall/07-hammock.webp" alt="bowski in a hammock between rockets" loading="lazy" decoding="async" width="480" height="640"><figcaption>wake me up when we land 😴</figcaption></figure>
+        <figure class="meme"><img src="img/wall/14-stained-glass.webp" alt="bowski in a stained glass window" loading="lazy" decoding="async" width="480" height="640"><figcaption>patron saint of doing nothing 🙏</figcaption></figure>
+        <figure class="meme"><img src="img/wall/05-laser-anime.webp" alt="bowski with laser eyes" loading="lazy" decoding="async" width="480" height="640"><figcaption>charging up. also napping ⚡</figcaption></figure>
+        <figure class="meme"><img src="img/wall/26-parade.webp" alt="a bowski parade" loading="lazy" decoding="async" width="480" height="640"><figcaption>thank u gang. genuinely 🍐</figcaption></figure>
+        <figure class="meme"><img src="img/wall/10-egyptian.webp" alt="bowski as an egyptian pharaoh" loading="lazy" decoding="async" width="480" height="640"><figcaption>the pharaohs knew 👁️</figcaption></figure>
+        <figure class="meme"><img src="img/wall/27-moon-rave.webp" alt="a rave on the moon" loading="lazy" decoding="async" width="480" height="640"><figcaption>dj is tired but hes going 🎧</figcaption></figure>
+        <figure class="meme"><img src="img/wall/12-skate.webp" alt="bowski skating" loading="lazy" decoding="async" width="480" height="640"><figcaption>landed it. barely 🛹</figcaption></figure>
+        <figure class="meme"><img src="img/wall/32-creation.webp" alt="bowski in the creation of adam" loading="lazy" decoding="async" width="480" height="640"><figcaption>and on launch day, bowski rested</figcaption></figure>
+        <figure class="meme"><img src="img/wall/17-stadium.webp" alt="a full stadium of bowskis" loading="lazy" decoding="async" width="480" height="640"><figcaption>the whole stadium 🏟️</figcaption></figure>
+        <figure class="meme"><img src="img/wall/06-vinyl-toy.webp" alt="bowski as a vinyl toy" loading="lazy" decoding="async" width="480" height="640"><figcaption>would u put him on ur shelf 🧸</figcaption></figure>
+        <figure class="meme"><img src="img/wall/33-great-wave.webp" alt="bowski riding the great wave" loading="lazy" decoding="async" width="480" height="640"><figcaption>riding the big one 🌊</figcaption></figure>
+        <figure class="meme"><img src="img/wall/20-mission-control.webp" alt="bowski asleep at mission control" loading="lazy" decoding="async" width="480" height="640"><figcaption>the commander is asleep at the desk</figcaption></figure>
+        <figure class="meme"><img src="img/wall/37-chalk.webp" alt="bowski as street chalk art" loading="lazy" decoding="async" width="480" height="640"><figcaption>still hanin aroun 🤫</figcaption></figure>
+      </div></div>
+      <div class="wall-row r3"><div class="track">
+        <figure class="meme"><img src="img/wall/29-throne-on-moon.webp" alt="bowski on a throne on the moon" loading="lazy" decoding="async" width="480" height="640"><figcaption>king of the moon. napping 👑</figcaption></figure>
+        <figure class="meme"><img src="img/wall/16-bus-stop.webp" alt="bowski at a bus stop next to a rocket" loading="lazy" decoding="async" width="480" height="640"><figcaption>oh. its a rocket. ok 🚀</figcaption></figure>
+        <figure class="meme"><img src="img/wall/03-coin-surf.webp" alt="bowski surfing on a coin" loading="lazy" decoding="async" width="480" height="640"><figcaption>gm gm 🌊🪙</figcaption></figure>
+        <figure class="meme"><img src="img/wall/19-army-in-position.webp" alt="the pear army in position" loading="lazy" decoding="async" width="480" height="640"><figcaption>the army is in position</figcaption></figure>
+        <figure class="meme"><img src="img/wall/11-laser-comic.webp" alt="bowski in a comic with laser eyes" loading="lazy" decoding="async" width="480" height="640"><figcaption>locked in 🎯</figcaption></figure>
+        <figure class="meme"><img src="img/wall/24-flag-on-moon.webp" alt="the bowski flag on the moon" loading="lazy" decoding="async" width="480" height="640"><figcaption>we planted the flag 🚩</figcaption></figure>
+        <figure class="meme"><img src="img/wall/01-felt-puppet.webp" alt="bowski as a felt puppet lighting a rocket" loading="lazy" decoding="async" width="480" height="640"><figcaption>small fuse. big rocket 🧨</figcaption></figure>
+        <figure class="meme"><img src="img/wall/15-coronation.webp" alt="angels crowning bowski" loading="lazy" decoding="async" width="480" height="640"><figcaption>crowned. he slept thru it 👑</figcaption></figure>
+        <figure class="meme"><img src="img/wall/21-full-power.webp" alt="bowski at full power" loading="lazy" decoding="async" width="480" height="640"><figcaption>full power ⚡</figcaption></figure>
+        <figure class="meme"><img src="img/wall/34-bus-stop-2.webp" alt="bowski waiting by a rocket" loading="lazy" decoding="async" width="480" height="640"><figcaption>next stop: the moon 🚏</figcaption></figure>
+        <figure class="meme"><img src="img/wall/18-launch-pad.webp" alt="bowski on the launch pad" loading="lazy" decoding="async" width="480" height="640"><figcaption>fuelled up. hands in pockets</figcaption></figure>
+        <figure class="meme"><img src="img/wall/23-liftoff.webp" alt="a bowski rocket lifting off" loading="lazy" decoding="async" width="480" height="640"><figcaption>liftoff 🚀</figcaption></figure>
+      </div></div>
+    </div>
+  </section>
+
+  <section class="block raid" id="raid">
+    <div class="raid-grid">
+      <a class="phone reveal" href="https://x.com/binobowski_" target="_blank" rel="noopener noreferrer" aria-label="bowski on X, newest post at the top">
+        <video class="autoplay" muted loop playsinline preload="none" poster="vid/x-delivers.webp" src="vid/x-delivers.mp4"></video>
+        <span class="badge">NEWEST POST</span>
+      </a>
+      <div class="reveal">
+        <h2 class="h2">WE RAID EVERY POST ⚔️<small>bowski posts. the gang shows up. thats the whole plan.</small></h2>
+        <ol class="raid-steps">
+          <li><b>1</b>open his newest post</li>
+          <li><b>2</b>like it. repost it</li>
+          <li><b>3</b>reply with a bowski meme. lazy ones count</li>
+        </ol>
+        <a class="btn pink xl" href="https://x.com/binobowski_" target="_blank" rel="noopener noreferrer">RAID THE NEWEST POST ⚔️</a>
+        <p class="raid-note">his newest post is always the one at the top. new ones drop every day 😴</p>
+      </div>
+    </div>
+    <div class="card contest reveal">
+      <div class="trophy" aria-hidden="true">🏆</div>
+      <div>
+        <h3>MEME CONTEST</h3>
+        <p>best bowski meme gets posted on the official X. make one. drop it in the telegram. thats it 🤫</p>
+      </div>
+      <a class="btn lime" href="https://t.me/binobowski" target="_blank" rel="noopener noreferrer">DROP IT IN THE TG 💬</a>
+    </div>
+  </section>
+
+  <section class="block play" id="play">
+    <a class="play-card reveal" href="/play/">
+      <span class="play-pic" aria-hidden="true"><img src="img/wall/07-hammock.webp" alt="" width="480" height="640" loading="lazy" decoding="async"><span class="zzz">z<b>z</b><i>Z</i></span></span>
+      <span class="play-txt">
+        <span class="play-k">NEW · BROWSER GAME</span>
+        <span class="play-h">can u keep bowski awake? 🍐</span>
+        <span class="play-s">tap to flap. dodge the stuff. he will fall asleep. beat ur mates</span>
+        <span class="btn cyan xl play-btn">PLAY BOWSKI FLAP 🎮</span>
+      </span>
+    </a>
+  </section>
+
+  <div class="marquee pink" aria-hidden="true"><div class="row" id="mq2"></div></div>
+
+  <section class="story" id="story" aria-label="how bowski got to the moon">
+    <div class="story-stage">
+      <div class="story-bg"></div>
+      <div class="story-head"><span>HOW HE GOT HERE</span><span class="story-dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></span></div>
+      <div class="deck">
+        <div class="scene" style="--c:var(--gold)"><div class="pic"><img src="gen/scene1-shoes.webp" data-gen="gen/scene1-shoes.webp" data-fb="vid/reel-top1.webp" alt="bowski walking down a sunny street holding his sneakers" width="672" height="900" loading="lazy" decoding="async"><span class="ep">EP 1</span></div></div>
+        <div class="scene" style="--c:var(--lime)"><div class="pic"><img src="gen/scene2-roadster.webp" data-gen="gen/scene2-roadster.webp" data-fb="vid/x-roadster.webp" data-vid="gen/scene2-roadster.mp4" alt="bowski on a green supercar flying off a neon ramp" width="672" height="900" loading="lazy" decoding="async"><span class="ep">EP 2</span></div></div>
+        <div class="scene" style="--c:var(--pink)"><div class="pic"><img src="gen/scene3-rocket.webp" data-gen="gen/scene3-rocket.webp" data-fb="img/23-liftoff.webp" data-vid="gen/scene3-rocket.mp4" alt="bowski strapped to the side of a rocket at liftoff" width="672" height="900" loading="lazy" decoding="async"><span class="ep">EP 3</span></div></div>
+        <div class="scene" style="--c:var(--cyan)"><div class="pic"><img src="gen/scene4-moon-throne.webp" data-gen="gen/scene4-moon-throne.webp" data-fb="img/29-throne-on-moon.webp" alt="bowski slouched on a gold throne on the moon" width="672" height="900" loading="lazy" decoding="async"><span class="ep">EP 4</span></div></div>
+      </div>
+      <div class="caps">
+        <div class="cap"><p>woke up. grabbed my shoes. didnt put them on 👟</p></div>
+        <div class="cap"><p>found a green car. found a ramp. my bad 🏎️</p></div>
+        <div class="cap"><p>rocket was just sitting there. felt rude not to 🚀</p></div>
+        <div class="cap"><p>made it. comfy up here. nap time 👑</p><span class="tag">bowski to moon 🌕</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block reels" id="reels">
+    <h2 class="h2 reveal">THE REELS<small>his own. 5m+ views on instagram. this is where the gang came from.</small></h2>
+    <div class="reel-row reveal">
+      <a class="reel" href="https://www.instagram.com/reel/DeGw25zy57O/" target="_blank" rel="noopener noreferrer">
+        <video class="autoplay" muted loop playsinline preload="none" poster="vid/reel-top1.webp" src="vid/reel-top1.mp4"></video>
+        <span class="ig">IG</span>
+        <span class="meta"><span class="views">3.2M<small>views</small></span><span class="likes">259K likes</span><span class="cap2">"bowski to moon 🌕"</span></span>
+      </a>
+      <a class="reel" href="https://www.instagram.com/p/Dd8sszHyKv7/" target="_blank" rel="noopener noreferrer">
+        <video class="autoplay" muted loop playsinline preload="none" poster="vid/reel-top2.webp" src="vid/reel-top2.mp4"></video>
+        <span class="ig">IG</span>
+        <span class="meta"><span class="views">1.2M<small>views</small></span><span class="cap2">the stare</span></span>
+      </a>
+    </div>
+    <h3 class="sub-h reveal">FRESH ON X 🎬</h3>
+    <p class="sub-p">new bowski every day. swipe →</p>
+    <div class="xrow">
+      <a class="xclip" href="https://x.com/binobowski_/status/2111340872310902869" target="_blank" rel="noopener noreferrer"><div class="v"><video class="autoplay" muted loop playsinline preload="none" poster="vid/x-delivers.webp" src="vid/x-delivers.mp4"></video></div><p><b>BOWSKI DELIVERS 🍐🚘</b>he flew it up himself 😴</p></a>
+      <a class="xclip" href="https://x.com/binobowski_/status/2111322600492400748" target="_blank" rel="noopener noreferrer"><div class="v"><video class="autoplay" muted loop playsinline preload="none" poster="vid/x-roadster.webp" src="vid/x-roadster.mp4"></video></div><p><b>TAKING OFF 🚀🍐</b>rode the green roadster off the ramp</p></a>
+      <a class="xclip" href="https://x.com/binobowski_/status/2111308032223408358" target="_blank" rel="noopener noreferrer"><div class="v"><video class="autoplay" muted loop playsinline preload="none" poster="vid/x-bee.webp" src="vid/x-bee.mp4"></video></div><p><b>BOWSKI + HIS BOY 🍐🐝</b>woke up on a yacht 😴</p></a>
+      <a class="xclip" href="https://x.com/binobowski_/status/2111285959765754009" target="_blank" rel="noopener noreferrer"><div class="v"><video class="autoplay" muted loop playsinline preload="none" poster="vid/x-moon.webp" src="vid/x-moon.mp4"></video></div><p><b>GOING TO THE MOON 🌕</b>pear things 🍐</p></a>
+      <a class="xclip wide" href="https://x.com/binobowski_/status/2110998116266824074" target="_blank" rel="noopener noreferrer"><div class="v"><video class="autoplay" muted loop playsinline preload="none" poster="vid/x-party.webp" src="vid/x-party.mp4"></video></div><p><b>PARTY STARTED EARLY 🕺</b>only came 4 the snacks 🤫</p></a>
+    </div>
+  </section>
+
+  <section class="block" id="receipts">
+    <h2 class="h2 reveal">THE RECEIPTS<small>everything we did, on chain. check it yourself.</small></h2>
+    <div class="receipts reveal">
+      <a class="card receipt" href="https://solscan.io/tx/3YvRArdAHSF7NDHXuuH4LBasmXaLpuKT8DBxJx7bHWwQnhBKFRTnMymqcvvGaWos2opa3wppM1R9E241ELGzoZUG" target="_blank" rel="noopener noreferrer"><img src="img/proof-burn.webp" alt="Solscan: 20,000,000 BOWSKI burned" loading="lazy"><h3>🔥 2% BURNED FOREVER</h3><p>20,000,000 $BOWSKI burned by the dev wallet. tap for solscan.</p></a>
+      <a class="card receipt" href="https://solscan.io/tx/61oVCaoFBaRanScY9ajjqpXkAx8jWUFBpLTgNt2eXMi3fKRtFZ3DBjztv2AHkTPx72F1mGhJii1Z1TjDg97vRE4w" target="_blank" rel="noopener noreferrer"><img src="img/proof-lock.webp" alt="Solscan: 10,050,000 BOWSKI locked on Streamflow" loading="lazy"><h3>🔒 1% LOCKED 10 DAYS</h3><p>10,050,000 $BOWSKI in a Streamflow vault. tap for solscan.</p></a>
+      <a class="card receipt" href="https://v2.bubblemaps.io/map?address=84Ciai5YhpxxYiLE55SJqGHY3jftEtVxvcBXMwyapump&amp;chain=solana" target="_blank" rel="noopener noreferrer"><img src="img/proof-bubblemap.webp" alt="Bubblemaps: top holders not linked to the dev" loading="lazy"><h3>🫧 TOP WALLETS NOT OURS</h3><p>top holders and the dev wallet sit on their own. tap for bubblemaps.</p></a>
+    </div>
+    <p class="warn reveal">✅ dex paid on dexscreener.</p>
+  </section>
+
+  <section class="block lore" id="lore">
+    <h2 class="h2 reveal">WHO IS BOWSKI<small>official papers. he filled them in himself. mostly.</small></h2>
+    <div class="idcard reveal">
+      <div class="holo" aria-hidden="true"></div>
+      <div class="id-top"><span>REPUBLIC OF HANIN AROUN</span><span>PEAR ID · Nº 001</span></div>
+      <div class="id-body">
+        <div class="id-pic" id="idPic" role="button" tabindex="0" aria-label="poke bowski's photo"><img src="gen/lore.webp" data-gen="gen/lore.webp" data-fb="img/wall/06-vinyl-toy.webp" alt="bowski's id photo, blank stare, collar and tie" width="672" height="900" loading="lazy" decoding="async"></div>
+        <dl>
+          <dt>NAME</dt><dd>bino bowski</dd>
+          <dt>SPECIES</dt><dd>pear (probably)</dd>
+          <dt>JOB</dt><dd>professional napper</dd>
+          <dt>ORIGIN</dt><dd>fell off a tree in camo shorts. landed in the grass. never got up</dd>
+          <dt>HORNS</dt><dd>yes. dont ask</dd>
+          <dt>BEST MATE</dt><dd>bino bee 🐝</dd>
+          <dt>KNOWN FOR</dt><dd>5m views. zero effort</dd>
+        </dl>
+      </div>
+      <div class="nap">
+        <div class="nap-h"><span>NAP LEVEL</span><b id="napPct">100%</b></div>
+        <div class="meter"><i id="napBar"></i></div>
+        <div class="mood" id="mood">fast asleep 😴</div>
+        <button class="btn pink wake" id="wakeBtn" type="button">POKE HIM 👉</button>
+        <div class="stats"><span>pokes: <b id="taps">0</b></span><span>times woken: <b id="woken">0</b></span></div>
+      </div>
+      <div class="id-sig"><span>ISSUED BY: nobody. he made it himself</span><span>zzz</span></div>
+    </div>
+  </section>
+
+  <section class="bee" id="bee">
+    <div class="bee-in">
+      <div class="bee-pic reveal"><img src="gen/bee-tease.webp" data-gen="gen/bee-tease.webp" data-fb="vid/x-bee.webp" alt="a figure in a bee costume in a dark halloween forest" width="672" height="900" loading="lazy" decoding="async"><span class="q" aria-hidden="true">?</span></div>
+      <div class="reveal">
+        <p class="bee-k">🐝 BOWSKI'S BOY</p>
+        <h2 class="h2">SOMETHING'S BUZZING<small>his boy wakes up on halloween. thats all u get 🤫</small></h2>
+        <div class="count" id="beeCount" role="timer" aria-label="countdown to halloween">
+          <div class="u"><div class="n" id="bd">--</div><div class="l">DAYS</div></div>
+          <div class="u"><div class="n" id="bh">--</div><div class="l">HRS</div></div>
+          <div class="u"><div class="n" id="bm">--</div><div class="l">MIN</div></div>
+          <div class="u"><div class="n" id="bs">--</div><div class="l">SEC</div></div>
+        </div>
+        <p class="bee-date">31/10 · halloween 🎃</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="buy">
+    <h2 class="h2 reveal">HOW TO GET $BOWSKI<small>three steps. even bowski could do it. he won't.</small></h2>
+    <div class="steps reveal">
+      <div class="card step"><div class="num">1</div><h3>GET A WALLET</h3><p>download phantom or solflare. write your seed phrase down and never show it to anyone. ever.</p></div>
+      <div class="card step"><div class="num">2</div><h3>GET SOME SOL</h3><p>buy SOL on an exchange or in the wallet, then send it to your wallet.</p></div>
+      <div class="card step"><div class="num">3</div><h3>SWAP FOR $BOWSKI</h3><p>copy the CA from this page, paste it on pump.fun, connect your wallet and swap.</p></div>
+    </div>
+  </section>
+
+  <section class="block" id="links">
+    <h2 class="h2 reveal">FIND HIM<small>the real ones. 5m+ views on instagram.</small></h2>
+    <div class="links reveal">
+      <a class="btn lime" href="https://t.me/binobowski" target="_blank" rel="noopener noreferrer">TELEGRAM 💬</a>
+      <a class="btn white" href="https://x.com/binobowski_" target="_blank" rel="noopener noreferrer">X @binobowski_</a>
+      <a class="btn pink" href="https://www.instagram.com/binobowski_/" target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
+      <a class="btn dark" href="https://dexscreener.com/solana/84Ciai5YhpxxYiLE55SJqGHY3jftEtVxvcBXMwyapump" target="_blank" rel="noopener noreferrer">DEXSCREENER 📈</a>
+      <a class="btn gold" href="https://x.com/binobee_" target="_blank" rel="noopener noreferrer">BINO BEE 🐝</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="big">$BOWSKI</div>
+  <p>a meme coin with no promises and no financial advice. just a pear hanin aroun.</p>
+  <p>bino bowski is an AI character, not a real pear. or a real person.</p>
+</footer>
+
+<div class="dock" id="dock">
+  <button class="btn lime js-copy" type="button">COPY CA</button>
+  <a class="btn gold" href="https://t.me/binobowski" target="_blank" rel="noopener noreferrer">JOIN THE TG 💬</a>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite">COPIED 🤫</div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
