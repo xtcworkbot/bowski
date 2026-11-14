@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>bowski flap · $BOWSKI</title>
+<meta name="description" content="tap to flap 🍐 get bino bowski through the honey pillars. how far can you go?">
+<meta property="og:title" content="bowski flap · $BOWSKI">
+<meta property="og:description" content="tap to flap 🍐 how far can bino bowski get?">
+<meta property="og:image" content="https://bowski.vercel.app/coin.jpg">
+<meta property="og:url" content="https://bowski.vercel.app/play/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@binobowski_">
+<meta name="twitter:title" content="bowski flap · $BOWSKI">
+<meta name="twitter:description" content="tap to flap 🍐 how far can bino bowski get?">
+<meta name="twitter:image" content="https://bowski.vercel.app/coin.jpg">
+<meta name="theme-color" content="#14001f">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="icon" href="/favicon.png">
+<link rel="preload" as="font" type="font/woff2" href="/fonts/bungee.woff2" crossorigin>
+<link rel="preload" as="image" href="/play/assets/bowski.webp">
+<style>
+@font-face{font-family:"Bungee";font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/bungee.woff2) format("woff2")}
+:root{--bg:#14001f;--ink:#fff;--pink:#ff2bd6;--lime:#b6ff00;--gold:#ffc400;--purple:#7a00ff;
+  --st:env(safe-area-inset-top,0px);--sb:env(safe-area-inset-bottom,0px);--sl:env(safe-area-inset-left,0px);--sr:env(safe-area-inset-right,0px)}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);overscroll-behavior:none;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{position:fixed;inset:0;color:var(--ink);font-family:"Bungee",Impact,"Arial Black",system-ui,sans-serif;
+  -webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;touch-action:none}
+#stage{position:fixed;inset:0;width:100%;height:100%;height:100dvh;overflow:hidden;touch-action:none;background:var(--bg);cursor:pointer}
+#c{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none}
+#probe{position:absolute;left:0;top:0;width:0;height:0;visibility:hidden;pointer-events:none;
+  padding:var(--st) var(--sr) var(--sb) var(--sl)}
+#ui{position:absolute;inset:0;pointer-events:none}
+a,button{pointer-events:auto;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:3px solid var(--lime);outline-offset:3px}
+
+/* top bar, hidden while flapping so a tap near the top never hits a button */
+.bar{position:absolute;left:0;right:0;top:0;display:flex;justify-content:space-between;align-items:center;gap:10px;
+  padding:calc(var(--st) + 10px) calc(var(--sr) + 12px) 0 calc(var(--sl) + 12px);transition:opacity .2s}
+body.playing .bar{opacity:0}
+body.playing .bar *{pointer-events:none}
+.chip{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-width:44px;min-height:44px;padding:0 14px;border-radius:999px;
+  border:2px solid #fff;font-size:13px;text-decoration:none;background:rgba(20,0,31,.55);color:#fff;white-space:nowrap}
+.chip svg{width:20px;height:20px;display:block}
+.grp{display:flex;gap:8px}
+.ico{padding:0;width:44px}
+#snd .on{display:none}
+#snd[aria-pressed="true"] .on{display:block}
+#snd[aria-pressed="true"] .off{display:none}
+#fs .ex{display:none}
+body.fs #fs .ex{display:block}
+body.fs #fs .en{display:none}
+
+.screen{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;text-align:center;
+  padding:calc(var(--st) + 64px) calc(var(--sr) + 16px) calc(var(--sb) + 20px) calc(var(--sl) + 16px)}
+.screen.on{display:flex}
+
+/* start screen: the title sits right above the big sleepy Bowski, the copy right below him.
+   --top, --bot and --rbot come from game.js in CSS px, --gs is the world scale */
+.title{position:absolute;left:0;right:0;bottom:calc(100% - var(--top, 40%) + 12px + var(--gs, 1) * 34px);display:flex;flex-direction:column;align-items:center;
+  line-height:.86;font-size:clamp(30px,calc(var(--gs, 1) * 56px),124px);font-weight:400;
+  color:var(--gold);text-shadow:4px 4px 0 var(--pink),8px 8px 0 var(--purple);animation:wobble 2.4s ease-in-out infinite}
+.title .l2{color:var(--lime)}
+@keyframes wobble{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg) scale(1.03)}}
+.lower{position:absolute;left:0;right:0;top:calc(var(--bot, 62%) + 4px);display:flex;flex-direction:column;align-items:center;gap:calc(var(--gs, 1) * 8px)}
+.tap{font-size:clamp(20px,calc(var(--gs, 1) * 28px),44px);color:#fff;text-shadow:3px 3px 0 var(--pink);animation:pulse 1.1s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
+.best{font-size:clamp(13px,calc(var(--gs, 1) * 15px),22px);color:var(--gold);text-shadow:2px 2px 0 #14001f}
+.keys{display:none;font-family:system-ui,sans-serif;font-weight:700;font-size:13px;opacity:.75;text-shadow:1px 1px 0 #14001f}
+@media (hover:hover) and (pointer:fine){.keys{display:block}}
+#ready .tap{position:absolute;left:0;right:0;top:calc(var(--rbot, 60%) + 10px)}
+
+/* cards */
+.card{pointer-events:auto;cursor:default;margin:auto;width:min(100%,360px);display:flex;flex-direction:column;align-items:stretch;gap:12px;
+  padding:22px 20px 18px;border-radius:24px;background:rgba(20,0,31,.86);border:3px solid #fff;box-shadow:8px 8px 0 var(--pink);
+  animation:pop .28s cubic-bezier(.2,1.4,.4,1) both}
+@keyframes pop{from{transform:translateY(24px) scale(.9);opacity:0}to{transform:none;opacity:1}}
+.card h2{font-weight:400;font-size:clamp(30px,9vw,40px);line-height:1;color:var(--gold);text-shadow:3px 3px 0 var(--pink)}
+.scores{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.scores div{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 6px;border-radius:16px;background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.18)}
+.scores span{font-size:12px;color:#d9c6ff}
+.scores b{font-weight:400;font-size:40px;line-height:1;color:#fff}
+.scores .nb{border-color:var(--lime);box-shadow:0 0 0 2px var(--lime) inset}
+#msg{font-size:15px;color:var(--lime);min-height:1.2em}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:54px;padding:0 18px;border-radius:16px;font-size:18px;
+  text-decoration:none;border:3px solid #14001f;box-shadow:5px 5px 0 #14001f;transition:transform .08s,box-shadow .08s;color:#14001f}
+.btn:active{transform:translate(3px,3px);box-shadow:2px 2px 0 #14001f}
+.btn.lime{background:var(--lime)}
+.btn.pink{background:var(--pink);color:#fff}
+.link{font-size:13px;color:#fff;opacity:.85;text-decoration:underline;text-underline-offset:4px;padding:8px;align-self:center}
+#over .card{opacity:1}
+#over:not(.live) .card a,#over:not(.live) .card button{pointer-events:none}
+.card.small{width:auto;max-width:100%;padding:20px 28px;gap:6px;pointer-events:none;align-items:center;text-align:center}
+.card.small p{font-size:14px;color:#fff}
+#paused{cursor:pointer}
+@media (max-height:520px){
+  .screen{padding-top:calc(var(--st) + 8px)}
+  #over .card{gap:8px;padding:14px 16px 12px;width:min(100%,460px);display:grid;grid-template-columns:1fr 1fr}
+  #over .card h2,#over .card .scores,#over .card #msg,#over .card .link{grid-column:1 / -1}
+  .card h2{font-size:26px}
+  .scores b{font-size:28px}
+  .scores div{padding:6px}
+  .btn{min-height:46px;font-size:15px}
+  .link{padding:4px}
+}
+@media (prefers-reduced-motion:reduce){.title,.tap{animation:none}}
+</style>
+</head>
+<body>
+<div id="stage">
+  <canvas id="c" role="img" aria-label="Bowski Flap. Tap or press space to flap."></canvas>
+  <div id="ui">
+    <div class="bar">
+      <a class="chip" id="back" href="/">&larr; back to bowski</a>
+      <div class="grp">
+        <button class="chip ico" id="snd" type="button" aria-label="Sound" aria-pressed="false" title="Sound (M)">
+          <svg class="off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M17 9l5 6M22 9l-5 6"/></svg>
+          <svg class="on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19.5 5.5a9 9 0 0 1 0 13"/></svg>
+        </button>
+        <button class="chip ico" id="fs" type="button" aria-label="Full screen" title="Full screen (F)" hidden>
+          <svg class="en" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+          <svg class="ex" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <section id="start" class="screen on" aria-label="Start">
+      <h1 class="title"><span class="l1">bowski</span><span class="l2">flap</span></h1>
+      <div class="lower">
+        <p class="tap">tap to flap 🍐</p>
+        <p class="best">best <span id="bestStart">0</span></p>
+        <p class="keys">space or &uarr; to flap</p>
+      </div>
+    </section>
+
+    <section id="ready" class="screen" aria-label="Get ready">
+      <p class="tap">tap to flap 🍐</p>
+    </section>
+
+    <section id="paused" class="screen" aria-label="Paused">
+      <div class="card small"><h2>paused</h2><p>tap to keep flapping</p></div>
+    </section>
+
+    <section id="over" class="screen" aria-label="Game over">
+      <div class="card" role="dialog" aria-labelledby="overTitle">
+        <h2 id="overTitle">game over</h2>
+        <div class="scores">
+          <div><span>score</span><b id="sc">0</b></div>
+          <div id="bestBox"><span id="bestLabel">best</span><b id="bs">0</b></div>
+        </div>
+        <p id="msg"></p>
+        <button id="again" class="btn lime" type="button">play again</button>
+        <a id="share" class="btn pink" href="https://x.com/intent/tweet" target="_blank" rel="noopener noreferrer">share on X</a>
+        <a class="link" href="/">back to bowski</a>
+      </div>
+    </section>
+  </div>
+  <div id="probe"></div>
+</div>
+<script src="/play/game.js" defer></script>
+</body>
+</html>
