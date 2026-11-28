@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>bino bowski · links</title>
+<meta name="description" content="bino bowski. $BOWSKI on pump.fun, the website, the telegram, X, instagram and tiktok. just hanin aroun 🍐">
+<link rel="canonical" href="https://bowski.vercel.app/links">
+<meta name="theme-color" content="#12001c">
+<link rel="icon" href="/favicon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="bino bowski">
+<meta property="og:title" content="bino bowski · links">
+<meta property="og:description" content="$BOWSKI, the website, telegram, X, instagram, tiktok. just hanin aroun 🍐">
+<meta property="og:url" content="https://bowski.vercel.app/links">
+<meta property="og:image" content="https://bowski.vercel.app/links/assets/bowski-share.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@binobowski_">
+<meta name="twitter:title" content="bino bowski · links">
+<meta name="twitter:description" content="$BOWSKI, the website, telegram, X, instagram, tiktok. just hanin aroun 🍐">
+<meta name="twitter:image" content="https://bowski.vercel.app/links/assets/bowski-share.jpg">
+<link rel="preload" as="font" type="font/woff2" href="/fonts/bungee.woff2" crossorigin>
+<link rel="preload" as="image" href="/links/assets/bowski.webp">
+<style>
+  /* Bowski's link page. Same colours and type as bowski.vercel.app, quieter: one loud gold button, the rest dark.
+     Phone first and one screen tall. From 900px wide, Bowski stands on the left and the links sit on the right. */
+  @font-face { font-family: "Bungee"; font-weight: 400; font-display: swap; src: url(/fonts/bungee.woff2) format("woff2"); }
+  @font-face { font-family: "Space Grotesk"; font-weight: 300 700; font-display: swap; src: url(/fonts/space-grotesk.woff2) format("woff2"); }
+  :root {
+    --bg: #12001c; --ink: #fff; --mute: rgba(255, 255, 255, .62); --line: rgba(255, 255, 255, .12); --card: rgba(255, 255, 255, .045);
+    --gold: #ffc400; --lime: #b6ff00; --pink: #ff2bd6; --purple: #7a00ff;
+    --display: "Bungee", system-ui, sans-serif;
+    --body: "Space Grotesk", system-ui, sans-serif;
+    color-scheme: dark;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; }
+  html { overflow-x: hidden; overflow-x: clip; }
+  body {
+    min-height: 100vh; min-height: 100dvh;
+    background:
+      radial-gradient(90% 380px at 50% 40px, rgba(122, 0, 255, .34), transparent 70%),
+      radial-gradient(60% 260px at 50% 100%, rgba(255, 43, 214, .1), transparent 70%),
+      var(--bg);
+    color: var(--ink);
+    font-family: var(--body);
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+    overflow-x: hidden;
+  }
+  /* film grain and a soft vignette, so it reads as a photo set, not a flat page */
+  body::after {
+    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 5;
+    background:
+      radial-gradient(120% 90% at 50% 40%, transparent 55%, rgba(0, 0, 0, .45)),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+    opacity: .5; mix-blend-mode: overlay;
+  }
+
+  .page {
+    max-width: 440px; margin: 0 auto;
+    padding: max(10px, env(safe-area-inset-top)) 16px max(20px, env(safe-area-inset-bottom));
+  }
+
+  .hero { position: relative; height: clamp(170px, calc(100dvh - 470px), 380px); }
+  .moon {
+    position: absolute; left: 50%; top: 5%; height: 74%; aspect-ratio: 1; transform: translateX(-50%); border-radius: 50%;
+    background:
+      radial-gradient(circle at 30% 34%, rgba(196, 136, 0, .3) 0 9%, transparent 10%),
+      radial-gradient(circle at 66% 58%, rgba(196, 136, 0, .26) 0 13%, transparent 14%),
+      radial-gradient(circle at 44% 78%, rgba(196, 136, 0, .24) 0 6%, transparent 7%),
+      radial-gradient(circle at 36% 32%, #fff4c9, #ffd447 52%, #d99a00);
+    box-shadow: 0 0 40px rgba(255, 196, 0, .45);
+    animation: glow 6s ease-in-out infinite alternate;
+  }
+  @keyframes glow { to { box-shadow: 0 0 56px rgba(255, 196, 0, .6); } }
+  .star { position: absolute; width: 3px; height: 3px; border-radius: 50%; background: #fff; opacity: .8; animation: twinkle 3.4s ease-in-out infinite; }
+  .s1 { left: 10%; top: 34px; } .s2 { left: 87%; top: 64px; animation-delay: .9s; } .s3 { left: 15%; top: 170px; animation-delay: 1.7s; }
+  .s4 { left: 82%; top: 200px; animation-delay: 2.3s; }
+  @keyframes twinkle { 50% { opacity: .15; } }
+
+  .guy {
+    position: absolute; left: 50%; bottom: 6px; height: calc(100% - 16px); transform: translateX(-50%);
+    padding: 0; border: 0; background: none; cursor: pointer;
+  }
+  .guy img {
+    display: block; height: 100%; width: auto; transform-origin: 50% 100%;
+    animation: sway 5.5s ease-in-out infinite alternate;
+    filter: drop-shadow(0 10px 18px rgba(0, 0, 0, .55));
+  }
+  @keyframes sway { from { transform: rotate(-2deg); } to { transform: rotate(2deg) scaleY(1.012); } }
+  .guy.poke img { animation: poke .5s ease-out; }
+  @keyframes poke { 0% { transform: scale(1); } 30% { transform: scale(1.07, .91); } 60% { transform: scale(.97, 1.05); } 100% { transform: scale(1); } }
+  .guy:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; border-radius: 12px; }
+  .ground {
+    position: absolute; left: 50%; bottom: 0; width: 170px; height: 18px; transform: translateX(-50%); border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(0, 0, 0, .6), transparent);
+  }
+  .zz {
+    position: absolute; left: calc(50% - 74px); top: 22%;
+    font-family: var(--display); color: var(--lime); font-size: 17px; opacity: 0;
+    animation: zz 3.8s ease-out infinite; pointer-events: none;
+  }
+  .zz:nth-of-type(2) { animation-delay: 1.25s; font-size: 14px; }
+  .zz:nth-of-type(3) { animation-delay: 2.5s; font-size: 11px; }
+  @keyframes zz { 0% { opacity: 0; transform: translate(0, 0); } 20% { opacity: .9; } 100% { opacity: 0; transform: translate(-28px, -60px) rotate(-10deg); } }
+
+  .intro { text-align: center; margin-top: 10px; }
+  h1 {
+    margin: 0; font-family: var(--display); font-weight: 400;
+    font-size: clamp(34px, 10vw, 46px); line-height: 1; color: var(--gold);
+    text-shadow: 0 3px 0 var(--purple), 0 0 28px rgba(255, 196, 0, .25);
+  }
+  .lazy { margin: 8px 0 0; font-size: 15px; font-weight: 500; color: var(--mute); }
+
+  .links { display: flex; flex-direction: column; gap: 10px; margin-top: 18px; }
+  .row {
+    display: grid; grid-template-columns: 40px 1fr 16px; align-items: center; gap: 12px;
+    min-height: 58px; padding: 8px 14px 8px 9px;
+    border: 1px solid var(--line); border-radius: 14px; background: var(--card);
+    color: var(--ink); text-decoration: none;
+    transition: border-color .15s, background .15s, transform .1s;
+  }
+  .row:hover { border-color: rgba(255, 255, 255, .3); background: rgba(255, 255, 255, .07); }
+  .row:active { transform: scale(.985); }
+  .row:focus-visible, .tile:focus-visible, .ca:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+  .ico {
+    width: 40px; height: 40px; display: grid; place-items: center; border-radius: 10px; overflow: hidden;
+    background: rgba(255, 255, 255, .08); color: var(--ink);
+  }
+  .ico svg { width: 20px; height: 20px; fill: currentColor; }
+  .ico img { width: 100%; height: 100%; object-fit: cover; }
+  .ico img.pill { width: 32px; height: 32px; object-fit: contain; }
+  .txt { min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+  .ttl { font-size: 16px; font-weight: 700; line-height: 1.2; }
+  .sub { font-size: 12.5px; font-weight: 500; color: var(--mute); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .arr { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.2; opacity: .5; }
+
+  /* the one loud button */
+  .row.buy {
+    min-height: 64px; border: 0; background: var(--gold); color: #140019;
+    box-shadow: 0 10px 30px rgba(255, 196, 0, .22), inset 0 -3px 0 rgba(0, 0, 0, .14);
+  }
+  .row.buy:hover { background: #ffcf2e; }
+  .row.buy .ttl { font-family: var(--display); font-weight: 400; font-size: 18px; letter-spacing: .01em; }
+  .row.buy .sub { color: rgba(20, 0, 25, .62); }
+  .row.buy .ico { background: #140019; color: var(--gold); }
+  .row.site .ico { color: var(--lime); }
+
+  /* the contract address, tap to copy */
+  .ca {
+    display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 10px;
+    width: 100%; min-height: 46px; padding: 6px 6px 6px 14px;
+    border: 1px dashed rgba(255, 196, 0, .55); border-radius: 12px; background: rgba(255, 196, 0, .05);
+    color: var(--gold); font: inherit; text-align: left; cursor: pointer;
+  }
+  .ca-lbl { font-size: 11px; font-weight: 700; letter-spacing: .14em; }
+  .ca-val { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: ui-monospace, Menlo, monospace; font-size: 12.5px; color: rgba(255, 255, 255, .85); }
+  .ca-btn { padding: 7px 12px; border-radius: 8px; background: rgba(255, 196, 0, .16); font-size: 12px; font-weight: 700; min-width: 70px; text-align: center; }
+  .ca.done .ca-btn { background: var(--gold); color: #140019; }
+
+  /* telegram, X, instagram, tiktok as one row of tiles */
+  .tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .tile {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+    min-height: 64px; border: 1px solid var(--line); border-radius: 14px; background: var(--card);
+    color: var(--ink); text-decoration: none; font-size: 11.5px; font-weight: 600; color: var(--mute);
+    transition: border-color .15s, background .15s, transform .1s;
+  }
+  .tile svg { width: 21px; height: 21px; fill: #fff; }
+  .tile:hover { border-color: rgba(255, 255, 255, .3); background: rgba(255, 255, 255, .07); color: #fff; }
+  .tile:active { transform: scale(.96); }
+
+  @media (min-width: 900px) {
+    .page {
+      max-width: 1000px; min-height: 100vh; min-height: 100dvh;
+      display: grid; grid-template-columns: 1fr 400px; column-gap: 56px; align-items: center;
+      padding: 24px 40px;
+    }
+    .hero { height: min(580px, calc(100dvh - 48px)); }
+    .moon { height: 72%; top: 4%; }
+    .ground { width: 260px; }
+    .zz { left: calc(50% - 128px); top: 18%; font-size: 24px; }
+    .intro { text-align: left; margin-top: 0; }
+    h1 { font-size: 42px; }
+    .lazy { font-size: 16px; }
+    .links { margin-top: 22px; }
+  }
+
+  /* SwapMeme ad (JP, 23 Oct 2026): "partnered with SwapMeme", three swaps playing, like a pop-up.
+     Phone and tablet: docks at the bottom once the page has settled. 1240px and up: its own card on the right. */
+  .sm {
+    position: fixed; z-index: 4; left: 50%; bottom: max(10px, env(safe-area-inset-bottom));
+    width: min(440px, calc(100% - 20px));
+    display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: center;
+    padding: 8px 10px 8px 8px; border-radius: 16px;
+    background: #0b0a0e; border: 1px solid rgba(255, 61, 174, .55);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, .55), 0 0 32px rgba(255, 61, 174, .22);
+    color: #fff; font-family: var(--body); text-align: left;
+    opacity: 0; visibility: hidden; pointer-events: none; transform: translate(-50%, 24px);
+    transition: opacity .45s ease, transform .55s cubic-bezier(.2, .8, .2, 1), visibility 0s .55s;
+  }
+  body.sm-on .sm {
+    opacity: 1; visibility: visible; pointer-events: auto; transform: translate(-50%, 0);
+    transition: opacity .45s ease, transform .55s cubic-bezier(.2, .8, .2, 1);
+  }
+  body.sm-off .sm { display: none; }
+  .sm-vids { display: grid; grid-template-columns: repeat(3, 42px); gap: 5px; }
+  .sm-vids video { display: block; width: 100%; height: auto; aspect-ratio: 9 / 16; object-fit: cover; border-radius: 8px; background: #000; border: 1px solid rgba(255, 255, 255, .12); }
+  .sm-body { min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding-right: 24px; }
+  .sm-tag { font: 700 9.5px/1 ui-monospace, Menlo, monospace; letter-spacing: .16em; text-transform: uppercase; color: #ffb3df; }
+  .sm-brand { display: flex; align-items: center; gap: 7px; }
+  .sm-brand .m { width: 20px; height: 20px; border-radius: 6px; }
+  .sm-brand .w { height: 14px; width: auto; }
+  .sm-h, .sm-p { display: none; }
+  .sm-cta {
+    display: flex; align-items: center; justify-content: center; align-self: stretch; min-height: 34px; padding: 0 12px;
+    border-radius: 10px; background: #ff3dae; color: #fff; font-size: 13px; font-weight: 700; text-decoration: none; white-space: nowrap;
+    box-shadow: 0 6px 18px rgba(255, 61, 174, .35);
+  }
+  .sm-cta:hover { background: #ff57ba; }
+  .sm-cta:focus-visible, .sm-x:focus-visible, .sm-vids:focus-visible, .sm-brand:focus-visible { outline: 2px solid #ffb3df; outline-offset: 3px; }
+  .sm-x {
+    position: absolute; top: 6px; right: 6px; width: 26px; height: 26px; padding: 0; border: 0; border-radius: 8px;
+    background: rgba(255, 255, 255, .08); color: rgba(255, 255, 255, .7); font: 400 18px/26px system-ui, sans-serif; cursor: pointer;
+  }
+  .sm-x:hover { background: rgba(255, 255, 255, .16); color: #fff; }
+  /* the buttons: make yours, and SwapMeme's Instagram with its logo */
+  .sm-acts { display: flex; gap: 6px; align-self: stretch; }
+  .sm-acts .sm-cta { flex: 1; }
+  .sm-ig {
+    position: relative; flex: none; display: flex; align-items: center; justify-content: center; gap: 9px;
+    width: 38px; min-height: 34px; border-radius: 10px; text-decoration: none; color: #fff;
+    background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .14);
+  }
+  .sm-ig:hover { background: rgba(255, 255, 255, .14); }
+  .sm-ig:focus-visible { outline: 2px solid #ffb3df; outline-offset: 3px; }
+  .sm-ig .m { width: 22px; height: 22px; border-radius: 6px; }
+  .sm-ig .ig { position: absolute; right: -5px; bottom: -5px; width: 17px; height: 17px; display: grid; place-items: center; border-radius: 5px; border: 1.5px solid #0b0a0e;
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285aeb 90%); }
+  .sm-ig .ig svg { width: 9px; height: 9px; fill: #fff; }
+  .sm-ig .ig-txt { display: none; }
+  .hero { transition: height .5s cubic-bezier(.2, .8, .2, 1); }
+  @media (max-width: 899px) {
+    body.sm-on .hero { height: clamp(145px, calc(100dvh - 470px - 106px), 380px); }
+  }
+  @media (min-width: 900px) and (max-width: 1239px) {
+    .sm { left: auto; right: 16px; width: 380px; transform: translateY(24px); }
+    body.sm-on .sm { transform: none; }
+  }
+  @media (min-width: 1240px) {
+    .page { max-width: 1240px; grid-template-columns: minmax(0, 1fr) 380px 272px; column-gap: 44px; }
+    body.sm-off .page { max-width: 1000px; grid-template-columns: 1fr 400px; column-gap: 56px; }
+    .sm {
+      position: relative; left: auto; bottom: auto; width: auto; align-self: center;
+      display: flex; flex-direction: column; align-items: stretch; gap: 10px; padding: 16px; border-radius: 18px;
+      transform: translateX(28px);
+    }
+    body.sm-on .sm { transform: none; }
+    .sm-body { display: contents; }
+    .sm-tag { order: 1; } .sm-brand { order: 2; margin-bottom: 2px; } .sm-vids { order: 3; } .sm-h { order: 4; } .sm-p { order: 5; }
+    .sm-acts { order: 6; flex-direction: column; gap: 8px; }
+    .sm-ig { width: auto; min-height: 42px; justify-content: flex-start; padding: 0 12px; font-size: 13px; font-weight: 600; }
+    .sm-ig .ig { position: static; margin-left: auto; width: 22px; height: 22px; border: 0; border-radius: 6px; }
+    .sm-ig .ig svg { width: 12px; height: 12px; }
+    .sm-ig .ig-txt { display: inline; }
+    .sm-brand .m { width: 26px; height: 26px; border-radius: 7px; }
+    .sm-brand .w { height: 18px; }
+    .sm-vids { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+    .sm-vids video { border-radius: 10px; }
+    .sm-h { display: block; margin: 4px 0 0; font-size: 18px; font-weight: 700; line-height: 1.2; }
+    .sm-p { display: block; margin: -4px 0 4px; font-size: 13px; line-height: 1.4; color: rgba(255, 255, 255, .62); }
+    .sm-cta { min-height: 44px; font-size: 14.5px; border-radius: 12px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .moon, .star, .guy img, .zz { animation: none; }
+    .zz { display: none; }
+    .row, .tile { transition: none; }
+  }
+</style>
+</head>
+<body>
+<main class="page">
+  <div class="hero">
+    <div class="moon" aria-hidden="true"></div>
+    <span class="star s1" aria-hidden="true"></span><span class="star s2" aria-hidden="true"></span>
+    <span class="star s3" aria-hidden="true"></span><span class="star s4" aria-hidden="true"></span>
+    <div class="ground" aria-hidden="true"></div>
+    <button class="guy" type="button" aria-label="poke bowski">
+      <img src="/links/assets/bowski.webp" width="492" height="900" alt="bino bowski, a green pear with a face, in camo shorts">
+    </button>
+    <span class="zz" aria-hidden="true">z</span><span class="zz" aria-hidden="true">z</span><span class="zz" aria-hidden="true">z</span>
+  </div>
+
+  <div class="side">
+    <header class="intro">
+      <h1>BINO BOWSKI</h1>
+      <p class="lazy">just hanin aroun 🍐</p>
+    </header>
+
+    <nav class="links" aria-label="bino bowski links">
+      <a class="row buy" href="https://pump.fun/coin/84Ciai5YhpxxYiLE55SJqGHY3jftEtVxvcBXMwyapump" target="_blank" rel="noopener">
+        <span class="ico" aria-hidden="true"><img class="pill" src="/links/assets/pump-pill.png" alt="" width="30" height="30"></span>
+        <span class="txt"><span class="ttl">BUY $BOWSKI</span><span class="sub">pump.fun · solana</span></span>
+        <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+      </a>
+
+      <button class="ca" type="button" data-copy="84Ciai5YhpxxYiLE55SJqGHY3jftEtVxvcBXMwyapump" data-done="copied 🤫" aria-label="copy the $BOWSKI contract address">
+        <span class="ca-lbl">CA</span>
+        <span class="ca-val">84Ciai5YhpxxYiLE55SJqGHY3jftEtVxvcBXMwyapump</span>
+        <span class="ca-btn">copy</span>
+      </button>
+
+      <a class="row site" href="/">
+        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></span>
+        <span class="txt"><span class="ttl">the $BOWSKI website</span><span class="sub">bowski.vercel.app</span></span>
+        <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+
+      <div class="tiles">
+        <a class="tile" href="https://t.me/binobowski" target="_blank" rel="noopener" aria-label="telegram, t.me/binobowski">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.9 4.3 18.6 19.8c-.2 1.1-.9 1.4-1.8.9l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1 9.2-8.3c.4-.4-.1-.6-.6-.2L6 13.4l-4.9-1.5c-1.1-.3-1.1-1.1.2-1.6L20.5 3c.9-.3 1.7.2 1.4 1.3z"/></svg>telegram
+        </a>
+        <a class="tile" href="https://x.com/binobowski_" target="_blank" rel="noopener" aria-label="X, @binobowski_">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.8 2.5h3.3l-7.2 8.2 8.4 11.1h-6.6l-5.2-6.8-5.9 6.8H1.3l7.7-8.8L1 2.5h6.8l4.7 6.2zm-1.2 17.3h1.8L6.6 4.4H4.6z"/></svg>X
+        </a>
+        <a class="tile" href="https://www.instagram.com/binobowski_/" target="_blank" rel="noopener" aria-label="instagram, @binobowski_">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8C2.4 3.9 3.9 2.4 7.2 2.3 8.4 2.2 8.8 2.2 12 2.2zM12 0C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1 0 8.3 0 8.7 0 12s0 3.7.1 4.9c.2 4.4 2.6 6.8 7 7 1.2.1 1.6.1 4.9.1s3.7 0 4.9-.1c4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9s0-3.7-.1-4.9c-.2-4.4-2.6-6.8-7-7C15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.8a1.4 1.4 0 1 0 0 2.9 1.4 1.4 0 0 0 0-2.9z"/></svg>instagram
+        </a>
+        <a class="tile" href="https://www.tiktok.com/@binobowski_" target="_blank" rel="noopener" aria-label="tiktok, @binobowski_">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 2h-3.4v13.4a2.9 2.9 0 1 1-2.9-2.9c.3 0 .6 0 .9.1V9.1a6.3 6.3 0 1 0 5.4 6.3V8.6a8 8 0 0 0 4.6 1.5V6.7a4.6 4.6 0 0 1-4.6-4.7z"/></svg>tiktok
+        </a>
+      </div>
+
+      <a class="row" href="https://binobee.vercel.app">
+        <span class="ico" aria-hidden="true"><img src="/links/assets/bee-icon-180.png" alt="" width="40" height="40"></span>
+        <span class="txt"><span class="ttl">bino bee</span><span class="sub">my best friend</span></span>
+        <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </nav>
+  </div>
+
+  <aside class="sm" aria-label="partnered with SwapMeme">
+    <button class="sm-x" type="button" aria-label="close the SwapMeme ad">×</button>
+    <a class="sm-vids" href="https://swapmeme.app/?ref=bowski" target="_blank" rel="noopener" aria-label="SwapMeme swaps, the original meme sliding into the swapped version"><video src="/links/assets/swap-poodle-crew.mp4" poster="/links/assets/swap-poodle-crew.jpg" muted autoplay loop playsinline preload="metadata" width="240" height="426"></video><video src="/links/assets/swap-victorian-undertaker.mp4" poster="/links/assets/swap-victorian-undertaker.jpg" muted autoplay loop playsinline preload="metadata" width="240" height="426"></video><video src="/links/assets/swap-shoreline-shuffle.mp4" poster="/links/assets/swap-shoreline-shuffle.jpg" muted autoplay loop playsinline preload="metadata" width="240" height="426"></video></a>
+    <div class="sm-body">
+      <span class="sm-tag">partnered with</span>
+      <a class="sm-brand" href="https://swapmeme.app/?ref=bowski" target="_blank" rel="noopener"><img class="m" src="/links/assets/swapmeme-m.png" alt="" width="26" height="26"><img class="w" src="/links/assets/swapmeme-wordmark.svg" alt="SwapMeme" width="139" height="18"></a>
+      <p class="sm-h">Put yourself in any meme.</p>
+      <p class="sm-p">Pick a trend. Add your face. Get the video.</p>
+      <div class="sm-acts">
+        <a class="sm-cta" href="https://swapmeme.app/?ref=bowski" target="_blank" rel="noopener">Make yours →</a>
+        <a class="sm-ig" href="https://www.instagram.com/swapmeme.app/" target="_blank" rel="noopener" aria-label="SwapMeme on Instagram, @swapmeme.app"><img class="m" src="/links/assets/swapmeme-m.png" alt="" width="22" height="22"><span class="ig-txt">@swapmeme.app</span><span class="ig" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8C2.4 3.9 3.9 2.4 7.2 2.3 8.4 2.2 8.8 2.2 12 2.2zM12 0C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1 0 8.3 0 8.7 0 12s0 3.7.1 4.9c.2 4.4 2.6 6.8 7 7 1.2.1 1.6.1 4.9.1s3.7 0 4.9-.1c4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9s0-3.7-.1-4.9c-.2-4.4-2.6-6.8-7-7C15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.8a1.4 1.4 0 1 0 0 2.9 1.4 1.4 0 0 0 0-2.9z"/></svg></span></a>
+      </div>
+    </div>
+  </aside>
+</main>
+<script src="/links/assets/links.js" defer></script>
+</body>
+</html>
